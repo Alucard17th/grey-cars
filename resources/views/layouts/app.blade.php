@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fav Icon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('storage/logo/logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
 
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -40,7 +40,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{ url('/') }}"><img class="img-fluid"
-                    src="{{ asset('storage/logo/logo.png') }}" style="width:200px;"
+                    src="{{ asset('images/logo.png') }}" style="width:200px;"
                     alt="{{ config('app.name', 'Laravel') }}"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
