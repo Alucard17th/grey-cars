@@ -75,7 +75,7 @@
             <div class="row g-4">
                 <!-- Company Info -->
                 <div class="col-lg-4 col-md-6">
-                    <img src="{{ asset('storage/logo/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" class="img-fluid mb-3">
+                    <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" class="img-fluid mb-3">
                     <h5 class="text-uppercase mb-4" style="font-family: 'Oswald', sans-serif;">{{ config('app.name', 'Laravel') }}</h5>
                     <p>Premium vehicle solutions for discerning clients. Experience the road in unparalleled style and
                         comfort.</p>

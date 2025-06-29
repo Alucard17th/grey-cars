@@ -8,7 +8,7 @@
 
         <div class="carousel-inner">
             <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url('{{ asset('storage/slider/car-cards.png') }}');">
+            <div class="carousel-item active" style="background-image: url('{{ asset('images/slider/car-cards.png') }}');">
                 <div class="carousel-overlay"></div>
                 <div class="container">
                     <div class="row align-items-center py-5">
@@ -25,7 +25,7 @@
             </div>
 
             <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url('{{ asset('storage/slider/black-car.png') }}');">
+            <div class="carousel-item" style="background-image: url('{{ asset('images/slider/black-car.png') }}');">
                 <div class="carousel-overlay"></div>
                 <div class="container">
                     <div class="row align-items-center py-5">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Slide 3 -->
-            <div class="carousel-item" style="background-image: url('{{ asset('storage/slider/morocco-car.jpg') }}'); background-position:bottom !important;">
+            <div class="carousel-item" style="background-image: url('{{ asset('images/slider/morocco-car.jpg') }}'); background-position:bottom !important;">
                 <div class="carousel-overlay"></div>
                 <div class="container">
                     <div class="row align-items-center py-5">
