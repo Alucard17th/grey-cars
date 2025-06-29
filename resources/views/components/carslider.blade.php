@@ -23,9 +23,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $car->name }}</h5>
-                                    <p class="text-muted">{{ $car->year }} • <span
-                                            style="color: {{ $car->color }}">{{ $car->color }}</span></p>
+                                    <h5 class="card-title">{{ $car->name }}  <span class="text-muted fs-6">(or similar)</span></h5>
+                                    <p class="text-muted">{{ $car->year }}</p>
 
                                     @if($car->options && count($car->options) > 0)
                                     <h4 class="h6">Features:</h4>

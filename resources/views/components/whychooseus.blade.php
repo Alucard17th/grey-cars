@@ -12,7 +12,7 @@
                 <div class="card border-0 shadow-lg bg-transparent"
                     style="width: 350px; height: 50%;">
                     <div style="background: radial-gradient(circle at center, rgba(255, 0, 0, 0.4), transparent); border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;">
-                        <img src="{{ asset('images/banner_car.png') }}" class="card-img-top" alt="Featured Car">
+                        <img src="{{ asset('images/golf.png') }}" class="card-img-top" alt="Featured Car">
                     </div>
                     <div class="card-body text-center">
                         <a href="#" class="btn btn-primary me-2">Book Ride</a>

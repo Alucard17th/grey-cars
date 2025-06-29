@@ -28,7 +28,6 @@ class CarController extends Controller
 
    public function search(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'pickup_location' => 'required|string',
             'dropoff_location' => 'required|string',
@@ -184,6 +183,12 @@ class CarController extends Controller
                 ? $car->security_deposit_per_day * $days 
                 : $car->security_deposit_fixed;
 
+            // Between cities fees
+            $between_cities_fee = 0;
+            if(shouldApplyTransportFee($request['pickup_location'], $request['dropoff_location'])) {
+                $between_cities_fee = config('company.fees.between_cities');
+            }
+
             // Create reservation
             $reservation = $car->reservations()->create([
                 'customer_name' => $validated['customer_name'],
@@ -200,7 +205,7 @@ class CarController extends Controller
                 'extras' => json_encode($selectedExtras), // Store as JSON
                 'extras_total' => $extrasTotal,
                 'security_deposit' => $securityDeposit,
-                'total_price' => ($car->price_per_day * $days) + $extrasTotal,
+                'total_price' => ($car->price_per_day * $days) + $extrasTotal + $between_cities_fee,
                 'status' => 'confirmed',
                 'days' => $days
             ]);

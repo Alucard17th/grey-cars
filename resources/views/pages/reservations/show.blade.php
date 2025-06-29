@@ -182,6 +182,15 @@
                                     </tr>
                                     @endif
 
+                                    @if(shouldApplyTransportFee($reservation->pickup_location, $reservation->dropoff_location))
+                                    <tr>
+                                        <td class="ps-4">Transport Fee</td>
+                                        <td class="text-end pe-4">
+                                            ${{ number_format(config('company.fees.between_cities'), 2) }}
+                                        </td>
+                                    </tr>
+                                    @endif
+
                                     <tr class="border-top">
                                         <td class="ps-4"><strong>Subtotal</strong></td>
                                         <td class="text-end pe-4">

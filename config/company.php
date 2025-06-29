@@ -11,4 +11,8 @@ return [
         'instagram' => env('COMPANY_INSTAGRAM', '#'),
         'linkedin' => env('COMPANY_LINKEDIN', '#'),
     ],
+
+    'fees' => [
+        'between_cities' => env('BETWEEN_CITIES_COST', 80),
+    ]
 ];

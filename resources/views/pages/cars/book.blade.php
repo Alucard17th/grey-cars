@@ -39,9 +39,13 @@
                             <div class="alert alert-light">
                                 <h5 class="fw-bold">Booking Summary</h5>
                                 <p><strong>Pickup:</strong> {{ $searchParams['pickup_location'] }} on
-                                    <span class="fw-bold">{{ $searchParams['pickup_date'] }}</span> at {{ $searchParams['pickup_time'] }}</p>
+                                    <span class="fw-bold">{{ $searchParams['pickup_date'] }}</span> at
+                                    {{ $searchParams['pickup_time'] }}
+                                </p>
                                 <p><strong>Dropoff:</strong> {{ $searchParams['dropoff_location'] }} on
-                                    <span class="fw-bold">{{ $searchParams['dropoff_date'] }}</span> at {{ $searchParams['dropoff_time'] }}</p>
+                                    <span class="fw-bold">{{ $searchParams['dropoff_date'] }}</span> at
+                                    {{ $searchParams['dropoff_time'] }}
+                                </p>
                                 <p class="mb-0"><strong>Total Price:</strong>
                                     ${{ $car->calculateTotalPrice($searchParams['pickup_date'], $searchParams['dropoff_date']) }}
                                 </p>
@@ -170,6 +174,23 @@
                                     </div>
                                 </div>
 
+                                @if(shouldApplyTransportFee($searchParams['pickup_location'], $searchParams['dropoff_location']))
+                                <div class="alert alert-warning" role="alert">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="accept_transport_fee"
+                                            id="accept_transport_fee" required>
+                                        <label class="form-check-label" for="accept_transport_fee">
+                                            Your booking involves different cities
+                                            ({{ $searchParams['pickup_location'] }} to
+                                            {{ $searchParams['dropoff_location'] }}).
+                                            <span class="fw-semibold">An additional transport fee of 
+                                                <span class="fw-bold">${{ config('company.fees.between_cities') }}</span>
+                                                will apply</span>
+                                            to cover vehicle relocation between locations.
+                                        </label>
+                                    </div>
+                                </div>
+                                @endif
                                 <button type="submit" class="btn btn-primary w-100 py-3">
                                     <i class="fas fa-check-circle me-2"></i> Confirm Booking
                                 </button>

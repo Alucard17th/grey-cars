@@ -136,6 +136,7 @@ class ReservationController extends Controller
 
     private function buildPayload(array $data, Car $car): array
     {
+        $between_cities_fees = config('company.fees.between_cities');
         $days = Carbon::parse($data['pickup_date'])
                     ->diffInDays(Carbon::parse($data['dropoff_date'])) + 1;
 
