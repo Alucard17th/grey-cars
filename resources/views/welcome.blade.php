@@ -15,7 +15,7 @@
     @include('components.carslider')
 
     <!-- Car Search Modal -->
-    @include('components.searchcarmodal')
+    @include('components.searchCarModal')
 
     <!-- About Us Section -->
     @include('components.about')
