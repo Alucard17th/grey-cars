@@ -23,22 +23,28 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $car->name }}  <span class="text-muted fs-6">(or similar)</span></h5>
+                                    <h5 class="card-title">{{ $car->name }} <span class="text-muted fs-6">(or
+                                            similar)</span></h5>
                                     <p class="text-muted">{{ $car->year }}</p>
 
                                     @if($car->options && count($car->options) > 0)
-                                    <h4 class="h6">Features:</h4>
+                                    <h4 class="h5 fw-bold">Features:</h4>
                                     <div class="d-flex flex-wrap gap-2 mb-3">
                                         @foreach($car->options as $option)
-                                        <span class="badge bg-black p-2">{{ $option }}</span>
+                                        <span class="badge bg-black p-2 d-flex align-items-center">
+                                            <i class="bi {{ car_icon($option) }} me-1 fs-5"></i>
+                                            {{ $option }}</span>
                                         @endforeach
                                     </div>
                                     @endif
                                     @if($car->extras && count($car->extras) > 0)
-                                    <h4 class="h6">Extras:</h4>
+                                    <h4 class="h5 fw-bold">Extras:</h4>
                                     <div class="d-flex flex-wrap gap-2 mb-3">
                                         @foreach($car->extras as $extra => $price)
-                                        <span class="badge bg-black p-2">{{ $extra }} (${{ $price }})</span>
+
+                                        <span class="badge bg-black p-2 d-flex align-items-center"><i
+                                                class="bi {{ car_icon($extra) }} me-1 fs-5"></i>
+                                            {{ $extra }} (${{ $price }})</span>
                                         @endforeach
                                     </div>
                                     @endif
@@ -86,7 +92,18 @@
                             @if($car->options && count($car->options) > 0)
                             <div class="d-flex flex-wrap gap-2 mb-3">
                                 @foreach($car->options as $option)
-                                <span class="badge bg-black p-2">{{ $option }}</span>
+                                <span class="badge bg-black p-2 d-flex align-items-center"><i
+                                        class="bi {{ car_icon($option) }} me-1 fs-5"></i>{{ $option }}</span>
+                                @endforeach
+                            </div>
+                            @endif
+                            @if($car->extras && count($car->extras) > 0)
+                            <h4 class="h5 fw-bold">Extras:</h4>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                @foreach($car->extras as $extra => $price)
+                                <span class="badge bg-black p-2 d-flex align-items-center"><i
+                                        class="bi {{ car_icon($extra) }} me-1 fs-5"></i>
+                                    {{ $extra }} (${{ $price }})</span>
                                 @endforeach
                             </div>
                             @endif
