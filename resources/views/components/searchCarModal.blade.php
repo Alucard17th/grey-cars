@@ -71,7 +71,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex justify-content-center">
+            <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="confirmBooking">Continue</button>
             </div>
@@ -87,8 +87,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const startField = document.getElementById('modal_pickup_date'); // hidden
-    const endField = document.getElementById('modal_dropoff_date'); // hidden
+    const modalStartField = document.getElementById('modal_pickup_date'); // hidden
+    const modalEndField = document.getElementById('modal_dropoff_date'); // hidden
     const modalDatePicker = document.getElementById('modal_date_picker');
     const modalDatePickerContainer = modalDatePicker.parentElement;
     const modalForm = document.querySelector('#modalBookingForm');
@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     modalPicker.on('select', () => {
         const s = modalPicker.getStartDate();
         const e = modalPicker.getEndDate();
-        startField.value = s ? s.format('YYYY-MM-DD') : '';
-        endField.value = e ? e.format('YYYY-MM-DD') : '';
+        modalStartField.value = s ? s.format('YYYY-MM-DD') : '';
+        modalEndField.value = e ? e.format('YYYY-MM-DD') : '';
 
         // Safely remove error class
         if (modalDatePicker && modalDatePicker.classList) {
@@ -139,6 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 existingError.remove();
             }
         }
+
+        console.log('Range selected', modalPicker.getStartDate(), modalPicker.getEndDate());
+        console.log('Inputs updated', modalStartField.value, modalEndField.value);
+
     });
    
 });

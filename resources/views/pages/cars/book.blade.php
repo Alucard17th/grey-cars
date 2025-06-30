@@ -15,8 +15,7 @@
                         <div class="col-md-5">
                             <div class="mb-4">
                                 @if($car->image)
-                                <img src="{{ asset('storage/' . $car->image) }}" alt="{{ $car->name }}"
-                                    class="img-fluid rounded mb-3">
+                                <img src="{{$car->image_url }}" alt="{{ $car->name }}" class="img-fluid rounded mb-3">
                                 @else
                                 <div class="bg-light text-center p-5 rounded mb-3">
                                     <i class="fas fa-car fa-5x text-muted"></i>
@@ -28,9 +27,21 @@
                                 <p class=""><strong>Price:</strong> ${{ number_format($car->price_per_day, 2) }}
                                     /day</p>
                                 @if($car->options && count($car->options) > 0)
+                                <h4 class="h5 fw-bold">Features:</h4>
                                 <div class="d-flex flex-wrap gap-2 mb-3">
                                     @foreach($car->options as $option)
-                                    <span class="badge bg-black">{{ $option }}</span>
+                                    <span class="badge bg-black p-2 d-flex align-items-center"><i
+                                            class="bi {{ car_icon($option) }} me-1 fs-5"></i>{{ $option }}</span>
+                                    @endforeach
+                                </div>
+                                @endif
+                                @if($car->extras && count($car->extras) > 0)
+                                <h4 class="h5 fw-bold">Extras:</h4>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    @foreach($car->extras as $extra => $price)
+                                    <span class="badge bg-black p-2 d-flex align-items-center"><i
+                                            class="bi {{ car_icon($extra) }} me-1 fs-5"></i>
+                                        {{ $extra }} (${{ $price }})</span>
                                     @endforeach
                                 </div>
                                 @endif
@@ -174,7 +185,8 @@
                                     </div>
                                 </div>
 
-                                @if(shouldApplyTransportFee($searchParams['pickup_location'], $searchParams['dropoff_location']))
+                                @if(shouldApplyTransportFee($searchParams['pickup_location'],
+                                $searchParams['dropoff_location']))
                                 <div class="alert alert-warning" role="alert">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="accept_transport_fee"
@@ -183,8 +195,9 @@
                                             Your booking involves different cities
                                             ({{ $searchParams['pickup_location'] }} to
                                             {{ $searchParams['dropoff_location'] }}).
-                                            <span class="fw-semibold">An additional transport fee of 
-                                                <span class="fw-bold">${{ config('company.fees.between_cities') }}</span>
+                                            <span class="fw-semibold">An additional transport fee of
+                                                <span
+                                                    class="fw-bold">${{ config('company.fees.between_cities') }}</span>
                                                 will apply</span>
                                             to cover vehicle relocation between locations.
                                         </label>

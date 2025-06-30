@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Search Car Modal
 document.addEventListener("DOMContentLoaded", function () {
     const bookingModal = document.getElementById("bookingModal");
-    const bookingForm = document.getElementById("bookingForm");
+    const bookingForm = document.getElementById("modalBookingForm");
     const confirmBookingBtn = document.getElementById("confirmBooking");
     let currentCarId = null;
 
@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Handle form submission with Fetch
     confirmBookingBtn.addEventListener("click", async function () {
-        console.log('FROM CONFIRM BOOKING');
         if (!startField?.value || !endField?.value) {
             console.log('No start or end date');
             // Safely add error class
@@ -140,6 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formData = new FormData(bookingForm);
         const params = new URLSearchParams(formData);
+
+        console.log(params.toString());
 
         try {
             // Show loading state

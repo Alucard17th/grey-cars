@@ -81,8 +81,8 @@ class CarController extends Controller
                 'dropoff_location' => 'required|string',
                 'pickup_date' => 'required|date',
                 'dropoff_date' => 'required|date',
-                'pickup_time' => 'required',
-                'dropoff_time' => 'required',
+                'pickup_time' => 'nullable',
+                'dropoff_time' => 'nullable',
             ]);
             
             if(!empty($searchParams['pickup_date']) || !empty($searchParams['dropoff_date'])) {
@@ -107,8 +107,8 @@ class CarController extends Controller
                 'dropoff_location' => 'required|string',
                 'pickup_date' => 'required|date',
                 'dropoff_date' => 'required|date',
-                'pickup_time' => 'required',
-                'dropoff_time' => 'required',
+                'pickup_time' => 'nullable',
+                'dropoff_time' => 'nullable',
             ]);
             
             if(!empty($searchParams['pickup_date']) || !empty($searchParams['dropoff_date'])) {

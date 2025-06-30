@@ -86,10 +86,12 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ $car->name }}</h5>
+                            <h5 class="card-title">{{ $car->name }} <span class="text-muted fs-6">(or
+                                            similar)</span></h5>
                             <p class="text-muted">{{ $car->year }} • <span
                                     style="color: {{ $car->color }}">{{ $car->color }}</span></p>
                             @if($car->options && count($car->options) > 0)
+                            <h4 class="h5 fw-bold">Features:</h4>
                             <div class="d-flex flex-wrap gap-2 mb-3">
                                 @foreach($car->options as $option)
                                 <span class="badge bg-black p-2 d-flex align-items-center"><i
