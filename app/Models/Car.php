@@ -8,18 +8,7 @@ use Carbon\Carbon;
 class Car extends Model
 {
     //
-    protected $fillable = [
-        'name',
-        'year',
-        'color',
-        'price_per_day',
-        'security_deposit_per_day',
-        'security_deposit_fixed',
-        'image',
-        'options',
-        'extras',
-        'is_security_deposit_fix',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'options' => 'array',
@@ -29,7 +18,7 @@ class Car extends Model
     // Accessor for the full image path
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('storage/' . $this->image) : asset('images/default-car.jpg');
+        return $this->image ? asset( $this->image ) : asset('images/default-car.jpg');
     }
 
     public function reservations()

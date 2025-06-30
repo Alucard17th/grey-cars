@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class CarSeeder extends Seeder
+class OLDCarSeeder extends Seeder
 {
     const SHARED_IMAGE_PATH = 'cars/shared-car-image.jpg';
     
