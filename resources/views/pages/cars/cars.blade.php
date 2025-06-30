@@ -15,13 +15,18 @@
 .cars-pagination>nav>div>div>p {
     color: #ffffff !important;
 }
+
+.car-image {
+    min-height: 235px;
+    max-height: 235px;
+}
 </style>
 <div class="container py-5">
     <div class="row g-4">
         @foreach($cars as $car)
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow bg-light">
-                <img src="{{ $car->image_url }}" class="card-img-top" alt="{{ $car->name }}">
+                <img src="{{ $car->image_url }}" class="card-img-top car-image" alt="{{ $car->name }}">
                 <div class="card-body">
                     <h3 class="h5">{{ $car->name }} <span class="text-muted fs-6">(or
                             similar)</span></h3>
