@@ -17,8 +17,8 @@
 }
 
 .car-image {
-    min-height: 235px;
-    max-height: 235px;
+    min-height: 225px;
+    max-height: 225px;
 }
 </style>
 <div class="container py-5">

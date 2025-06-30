@@ -134,15 +134,6 @@
                                                 ${{ $car->security_deposit_per_day }} per day
                                             </label>
                                         </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="security_deposit"
-                                                id="security_deposit_fixed" value="fixed"
-                                                {{ old('security_deposit') == 'fixed' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="security_deposit_fixed">
-                                                ${{ $car->security_deposit_fixed }} fixed
-                                            </label>
-                                        </div>
                                         @endif
 
                                         @error('security_deposit')

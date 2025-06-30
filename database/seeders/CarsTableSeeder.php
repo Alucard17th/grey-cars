@@ -26,7 +26,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 30,
                 'image'                    => 'images/cars/dacia_logan_gasoil_manuelle_2023.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -43,7 +43,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 120,
                 'image'                    => 'images/cars/volkswagen_touareg.png',
                 'security_deposit_per_day' => 1800,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -62,7 +62,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 80,
                 'image'                    => 'images/cars/vw_troc_automatique.png',
                 'security_deposit_per_day' => 1500,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -81,7 +81,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 35,
                 'image'                    => 'images/cars/renault_clio5_manuelle_gasoil.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -98,7 +98,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 35,
                 'image'                    => 'images/cars/renault_clio5_bva_2025.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -115,7 +115,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 40,
                 'image'                    => 'images/cars/dacia_jogger_2024_manuelle_gasoil.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -132,7 +132,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 30,
                 'image'                    => 'images/cars/peugeot_208_2023_gris_gasoil_manuelle.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -150,7 +150,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 30,
                 'image'                    => 'images/cars/peugeot_208_2023_blanche_gasoil_manuelle.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -168,7 +168,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 45,
                 'image'                    => 'images/cars/dacia_duster_2023_bva_gasoil.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -186,7 +186,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 30,
                 'image'                    => 'images/cars/dacia_logan_2023_essence_automatique.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -203,7 +203,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 25,
                 'image'                    => 'images/cars/dacia_sandero_2025_essence_manuelle.png',
                 'security_deposit_per_day' => 900,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -220,7 +220,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 80,
                 'image'                    => 'images/cars/golf8_diesel_2025.png',
                 'security_deposit_per_day' => 1500,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
@@ -238,7 +238,7 @@ class CarsTableSeeder extends Seeder
                 'price_per_day'            => 70,
                 'image'                    => 'images/cars/skoda_octavia_2025_automatique.png',
                 'security_deposit_per_day' => 1200,
-                'security_deposit_fixed'   => null,
+                'security_deposit_fixed'   => true,
                 'options'                  => [
                     'Air conditioner',
                     '5-Door Hatchback',
