@@ -9,36 +9,36 @@
     @php
     $testimonials = [
         [
-            'name' => 'Sarah Johnson',
+            'name' => 'Anthony Martin',
             'role' => 'Marketing Director',
             'company' => 'TechSolutions Inc.',
-            'content' => 'Working with this team has been transformative for our business. Their attention to detail and creative approach delivered results beyond our expectations.',
+            'content' => "Rien à dire, prix attractif, très réactif aux messages, n'essaye pas d'arnaquer lors du retour du véhicule, véhicule très propre. Je n'hésiterais pas à louer chez eux à nouveau.",
             'rating' => 5,
-            'avatar' => 'https://randomuser.me/api/portraits/women/44.jpg'
+            'avatar' => 'https://lh3.googleusercontent.com/a-/ALV-UjVqD5jmHLIvomdkxvpwsJw-65mMC2Bh-jO-Sn-GJt294S0i4QbY=w72-h72-p-rp-mo-ba2-br100'
         ],
         [
-            'name' => 'Michael Chen',
+            'name' => 'Karim Kheroua',
             'role' => 'CEO',
             'company' => 'StartUp Ventures',
-            'content' => 'Exceptional service from start to finish. They understood our vision perfectly and executed flawlessly. Will definitely work with them again!',
+            'content' => "Top du top. Allez-y les yeux fermé. Voiture en excellent état. Réactif par message. Merci pour votre grand professionnalisme je recommande à 100%",
             'rating' => 5,
-            'avatar' => 'https://randomuser.me/api/portraits/men/32.jpg'
+            'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocK_Q2dH6ogFvYlaKA2K90-tH9RbmcRECGgU2YTCs-sGt1ADTQ=w72-h72-p-rp-mo-br100'
         ],
         [
-            'name' => 'Emma Rodriguez',
+            'name' => 'Pierre Sanchez',
             'role' => 'Product Manager',
             'company' => 'Digital Innovations',
-            'content' => 'The team delivered our project on time and within budget while maintaining the highest quality standards. Truly professional!',
-            'rating' => 4,
-            'avatar' => 'https://randomuser.me/api/portraits/women/63.jpg'
+            'content' => "Je suis extrêmement satisfait de la qualité du service de livraison proposé.  Le véhicule correspondait parfaitement à la description annoncée, ce qui est très appréciable.  La procédure de restitution s'est déroulée sans accroc et a été adaptée à mes besoins.  C'est une expérience que je recommande vivement.  Merci pour ce professionnalisme exemplaire.",
+            'rating' => 5,
+            'avatar' => 'https://lh3.googleusercontent.com/a-/ALV-UjVq-fSk7i0J6zPjHRvkPcojG-1SMZ0gG18H-EAgj6tiSEPevc2P-Q=w72-h72-p-rp-mo-ba5-br100'
         ],
         [
-            'name' => 'David Wilson',
+            'name' => 'Matej Képeš',
             'role' => 'CTO',
             'company' => 'Enterprise Systems',
-            'content' => 'Their technical expertise solved complex challenges we were facing. The solutions were innovative and scalable.',
+            'content' => "Great service, everything went smoothly and communication was spot on! Thank you!",
             'rating' => 5,
-            'avatar' => 'https://randomuser.me/api/portraits/men/75.jpg'
+            'avatar' => 'https://lh3.googleusercontent.com/a-/ALV-UjXrj1cWMIWU-YBmFt0rc9PlEu5rag8M84nUOPJzmaVbUScVlvTK=w72-h72-p-rp-mo-br100'
         ]
     ];
     @endphp
