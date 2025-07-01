@@ -11,7 +11,7 @@ class CarsTableSeeder extends Seeder
     /** Universal list of extras with prices (MAD per day) */
     private array $baseExtras = [
         'Extra Driver'      => 10,
-        'Maxi Cosy'         => 5,
+        'Maxi Cosi'         => 5,
         'Child Seat'        => 5,
         'Kayak Roof Rack/Surfboard' => 10,
     ];

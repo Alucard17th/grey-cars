@@ -39,9 +39,9 @@ if (! function_exists('car_icon')) {
 
             // ---- Extras ----
             'extra driver'         => 'bi-person-plus',
-            'child seat'           => 'bi-baby-carriage',
-            'maxi cosy'    => 'bi-shield-check',
-            'kayak roof rack/surfboard' => 'bi-surf',
+            'child seat'           => 'bi-person-wheelchair',
+            'maxi cosi'    => 'bi-shield-check',
+            'kayak roof rack/surfboard' => 'bi-tsunami',
         ];
 
         $key = strtolower(trim($name));
