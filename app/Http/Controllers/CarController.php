@@ -137,6 +137,7 @@ class CarController extends Controller
 
     public function storeBooking(Car $car, Request $request)
     {
+        // dd($request->all());
         try {
             $validated = $request->validate([
                 'customer_name' => 'required|string|max:255',
@@ -147,8 +148,8 @@ class CarController extends Controller
                 'dropoff_location' => 'required|string',
                 'pickup_date' => 'required|date',
                 'dropoff_date' => 'required|date',
-                'pickup_time' => 'required',
-                'dropoff_time' => 'required',
+                'pickup_time' => 'nullable',
+                'dropoff_time' => 'nullable',
                 'special_requests' => 'nullable|string',
                 'extras' => 'nullable|array',
                 'extras.*' => 'string',

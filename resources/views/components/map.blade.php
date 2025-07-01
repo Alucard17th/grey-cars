@@ -17,7 +17,7 @@
                             </div>
                             <div>
                                 <h4 class="h5 mb-1">Our Address</h4>
-                                <p>GREY CARS RENTAL<br>Agadir Aéroport<br>Agadir, Morocco</p>
+                                <p>GREY CARS RENTAL<br>{{ config('company.contact.address') }}</p>
                             </div>
                         </div>
 
@@ -27,7 +27,7 @@
                             </div>
                             <div>
                                 <h4 class="h5 mb-1">Call Us</h4>
-                                <p>+212 637-967524</p>
+                                <p>{{ config('company.contact.phone') }}</p>
                             </div>
                         </div>
 
@@ -37,7 +37,7 @@
                             </div>
                             <div>
                                 <h4 class="h5 mb-1">Email Us</h4>
-                                <p>contact@greycars.com</p>
+                                <p>{{ config('company.contact.email') }}</p>
                             </div>
                         </div>
 

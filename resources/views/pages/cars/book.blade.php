@@ -157,7 +157,7 @@
                                                 name="extras[]" id="extra-{{ Str::slug($name) }}" value="{{ $name }}"
                                                 data-price="{{ (float) preg_replace('/[^0-9.]/', '', $price) }}">
                                             <label class="form-check-label" for="extra-{{ Str::slug($name) }}">
-                                                <strong>{{ $name }}</strong> - {{ $price }} <small>(per day)</small>
+                                                <strong>{{ $name }}</strong> - ${{ $price }} <small>(per day)</small>
                                             </label>
                                         </div>
                                         @endforeach
@@ -171,7 +171,7 @@
                                         <input class="form-check-input" type="checkbox" name="accept_terms"
                                             id="accept_terms" required>
                                         <label class="form-check-label" for="accept_terms">
-                                            I acknowledge having read and accepted the Terms and Conditions of Use
+                                            I acknowledge having read and accepted the <a href="{{ route('terms-and-conditions') }}" target="_blank">Terms and Conditions of Use</a>.
                                         </label>
                                     </div>
                                 </div>

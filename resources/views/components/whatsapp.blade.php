@@ -1,5 +1,5 @@
 @props([
-    'phone' => '1234567890',
+    'phone' => '+212 637-967524',
     'message' => 'Hello, I have a question about...',
     'position' => 'bottom-right',
     'text' => 'Chat on WhatsApp',

@@ -89,7 +89,7 @@
                             Time</label>
                         <input type="time" name="pickup_time" id="pickup_time"
                             class="form-control @error('pickup_time') is-invalid @enderror"
-                            value="{{ old('pickup_time') }}" step="900">
+                            value="{{ old('pickup_time') }}">
                         @error('pickup_time')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -101,7 +101,7 @@
                             Off Time</label>
                         <input type="time" name="dropoff_time" id="dropoff_time"
                             class="form-control @error('dropoff_time') is-invalid @enderror"
-                            value="{{ old('dropoff_time') }}" step="900">
+                            value="{{ old('dropoff_time') }}">
                         @error('dropoff_time')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
