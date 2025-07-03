@@ -24,27 +24,41 @@ if (!function_exists('shouldApplyTransportFee')) {
 
 if (! function_exists('car_icon')) {
     /**
-     * Return a Bootstrap-Icons class for a given option/extra.
-     * Falls back to "bi-check-circle" if no match found.
+     * Return HTML for the icon that represents a given option/extra.
+     * Defaults to a generic “check-circle” icon.
      */
     function car_icon(string $name): string
     {
+        // Purely constant data – no function calls.
         static $map = [
             // ---- Features / options ----
-            'air conditioner'      => 'bi-snow',
-            '5-door hatchback'     => 'bi-door-closed',
-            '3-suitcase capacity'  => 'bi-suitcase',
-            'touchscreen'          => 'bi-display',
-            'gps'                  => 'bi-geo-alt',
+            'air conditioner'      => '<i class="bi bi-snow me-1 fs-5"></i>',
+            // '5-door hatchback'     => '<i class="bi bi-door-closed me-1 fs-5"></i>',
+            '3-suitcase capacity'  => '<i class="bi bi-suitcase me-1 fs-5"></i>',
+            'touchscreen'          => '<i class="bi bi-display me-1 fs-5"></i>',
+            'gps'                  => '<i class="bi bi-geo-alt me-1 fs-5"></i>',
 
             // ---- Extras ----
-            'extra driver'         => 'bi-person-plus',
-            'child seat'           => 'bi-person-wheelchair',
-            'maxi cosi'    => 'bi-shield-check',
-            'kayak roof rack/surfboard' => 'bi-tsunami',
+            'extra driver'         => '<i class="bi bi-person-plus me-1 fs-5"></i>',
+            // 'baby seat' => will be handled dynamically below
+            'kayak roof rack/surfboard' => '<i class="bi bi-tsunami me-1 fs-5"></i>',
+            'booster seat'         => '<i class="bi bi-shield-check me-1 fs-5"></i>',
         ];
 
         $key = strtolower(trim($name));
-        return $map[$key] ?? 'bi-check-circle';   // default icon
+
+        // Special-case items that need run-time helpers
+        if ($key === 'baby seat') {
+            return '<img src="'.asset('images/icons/maxi-cozi.png').'"
+                        alt="baby seat" style="width:20px;height:20px;" class="me-1"/>';
+        }
+
+        if ($key === '5-door hatchback') {
+            return '<img src="'.asset('images/icons/doors.png').'"
+                        alt="baby seat" style="width:20px;height:20px;" class="me-1"/>';
+        }
+
+        // Return mapped icon or default
+        return $map[$key] ?? '<i class="bi bi-check-circle me-1 fs-5"></i>';
     }
 }

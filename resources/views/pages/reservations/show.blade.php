@@ -186,7 +186,7 @@
                                     <tr>
                                         <td class="ps-4">Transport Fee</td>
                                         <td class="text-end pe-4">
-                                            ${{ number_format(config('company.fees.between_cities'), 2) }}
+                                            ${{ number_format(config('company.fees.between_cities'), 2) * 2 }}
                                         </td>
                                     </tr>
                                     @endif
@@ -208,9 +208,15 @@
                                     <tr class="bg-light">
                                         <td class="ps-4"><strong>Total Amount</strong></td>
                                         <td class="text-end pe-4">
+                                            @if(shouldApplyTransportFee($reservation->pickup_location, $reservation->dropoff_location))
+                                            <strong class="text-primary">
+                                                ${{ number_format($reservation->total_price + $reservation->security_deposit + config('company.fees.between_cities') * 2 , 2) }}
+                                            </strong>
+                                            @else
                                             <strong class="text-primary">
                                                 ${{ number_format($reservation->total_price + $reservation->security_deposit, 2) }}
                                             </strong>
+                                            @endif
                                         </td>
                                     </tr>
                                 </tbody>
