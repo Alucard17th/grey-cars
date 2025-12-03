@@ -246,7 +246,6 @@ class CarController extends Controller
                     Pickup: {$reservation->pickup_date->format('Y-m-d')} {$reservation->pickup_time} - {$reservation->pickup_location}<br>
                     Dropoff: {$reservation->dropoff_date->format('Y-m-d')} {$reservation->dropoff_time} - {$reservation->dropoff_location}<br><br>
                     Extras total: {$reservation->extras_total}<br>
-                    Security deposit: {$reservation->security_deposit}<br>
                     Total price (without deposit): {$reservation->total_price}<br>
                 ", function ($message) use ($reservation, $sendTo) {
                     $message->to($sendTo)
