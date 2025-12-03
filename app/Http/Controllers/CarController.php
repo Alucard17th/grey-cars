@@ -235,6 +235,7 @@ class CarController extends Controller
             try {
                 $whatsAppNumber = preg_replace('/\D+/', '', $reservation->customer_phone); // keep only digits
                 $whatsAppLink   = "https://wa.me/{$whatsAppNumber}";
+                $sendTo = config('rental.send_order_to_email', '€');
                 Mail::html("
                     New reservation #{$reservation->id}<br><br>
                     Car: {$reservation->car->name}<br>
@@ -247,8 +248,8 @@ class CarController extends Controller
                     Extras total: {$reservation->extras_total}<br>
                     Security deposit: {$reservation->security_deposit}<br>
                     Total price (without deposit): {$reservation->total_price}<br>
-                ", function ($message) use ($reservation) {
-                    $message->to('eddallal.noureddine@gmail.com')
+                ", function ($message) use ($reservation, $sendTo) {
+                    $message->to($sendTo)
                             ->subject('New Reservation #' . $reservation->id);
                 });
 
