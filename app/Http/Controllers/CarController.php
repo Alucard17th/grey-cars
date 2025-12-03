@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class CarController extends Controller
 {
@@ -153,7 +153,7 @@ class CarController extends Controller
                 'special_requests' => 'nullable|string',
                 'extras' => 'nullable|array',
                 'extras.*' => 'string',
-                'security_deposit' => 'required|string',
+                'security_deposit' => 'nullable|string',
             ]);
 
             // Calculate days for pricing
@@ -180,9 +180,28 @@ class CarController extends Controller
             }
 
             // Calculate security deposit
-            $securityDeposit = $validated['security_deposit'] === 'per_day' 
-                ? $car->security_deposit_per_day * $days 
-                : $car->security_deposit_fixed;
+            // $securityDeposit = $validated['security_deposit'] === 'per_day' 
+            //     ? $car->security_deposit_per_day * $days 
+            //     : $car->security_deposit_fixed;
+
+            // ---------- security deposit ----------
+            $useDeposit = config('rental.use_deposit'); // or config('app.use_deposit')
+
+            if ($useDeposit) {
+                // If car has fixed deposit only, force 'fixed'
+                $depositType = $car->is_security_deposit_fix
+                    ? 'fixed'
+                    : ($data['security_deposit'] ?? 'per_day');
+
+                if ($depositType === 'per_day') {
+                    $securityDeposit = $car->security_deposit_per_day * $days;
+                } else {
+                    $securityDeposit = $car->security_deposit_fixed;
+                }
+            } else {
+                // When deposit is disabled via .env/config
+                $securityDeposit = 0; // or null, depending on how you want to store it
+            }
 
             // Between cities fees
             $between_cities_fee = 0;
@@ -212,13 +231,40 @@ class CarController extends Controller
             ]);
 
             // Send confirmation email
+            // ---------- Send email to your Gmail with order details ----------
+            try {
+                $whatsAppNumber = preg_replace('/\D+/', '', $reservation->customer_phone); // keep only digits
+                $whatsAppLink   = "https://wa.me/{$whatsAppNumber}";
+                Mail::html("
+                    New reservation #{$reservation->id}<br><br>
+                    Car: {$reservation->car->name}<br>
+                    Days: {$reservation->days}<br>
+                    Customer: {$reservation->customer_name}<br>
+                    Email: {$reservation->customer_email}<br>
+                    Phone: <a href=\"{$whatsAppLink}\">WhatsApp {$reservation->customer_phone}</a><br><br>
+                    Pickup: {$reservation->pickup_date->format('Y-m-d')} {$reservation->pickup_time} - {$reservation->pickup_location}<br>
+                    Dropoff: {$reservation->dropoff_date->format('Y-m-d')} {$reservation->dropoff_time} - {$reservation->dropoff_location}<br><br>
+                    Extras total: {$reservation->extras_total}<br>
+                    Security deposit: {$reservation->security_deposit}<br>
+                    Total price (without deposit): {$reservation->total_price}<br>
+                ", function ($message) use ($reservation) {
+                    $message->to('eddallal.noureddine@gmail.com')
+                            ->subject('New Reservation #' . $reservation->id);
+                });
+
+            } catch (\Throwable $mailException) {
+                \Log::error('Failed to send reservation email', [
+                    'reservation_id' => $reservation->id,
+                    'error'          => $mailException->getMessage(),
+                ]);
+                // do NOT return/throw here, just continue
+            }
             // Mail::to($validated['customer_email'])->send(new ReservationConfirmation($reservation));
 
             return redirect()->route('reservations.show', $reservation)
                 ->with('success', 'Your reservation has been confirmed!');
                 
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return back()->withInput()
                 ->with('error', 'An error occurred while processing your reservation: ' . $e->getMessage());
         }

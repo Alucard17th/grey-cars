@@ -60,7 +60,7 @@ class ReservationController extends Controller
             'special_requests'   => 'nullable|string',
             'extras'             => 'nullable|array',
             'extras.*'           => 'string',
-            'security_deposit'   => 'required|in:per_day,fixed',
+            'security_deposit'   => 'nullable|in:per_day,fixed',
             'status'             => 'nullable|in:confirmed,pending,cancelled',
         ]);
         
@@ -129,7 +129,7 @@ class ReservationController extends Controller
             'special_requests'   => 'nullable|string',
             'extras'             => 'nullable|array',
             'extras.*'           => 'string',
-            'security_deposit'   => 'required|in:per_day,fixed',
+            'security_deposit'   => 'nullable|in:per_day,fixed',
             'status'             => 'nullable|in:confirmed,pending,cancelled',
         ]);
     }
@@ -156,9 +156,28 @@ class ReservationController extends Controller
             }
         }
 
-        $securityDeposit = $data['security_deposit'] === 'per_day'
-            ? $car->security_deposit_per_day * $days
-            : $car->security_deposit_fixed;
+        // $securityDeposit = $data['security_deposit'] === 'per_day'
+        //     ? $car->security_deposit_per_day * $days
+        //     : $car->security_deposit_fixed;
+
+        // ---------- security deposit ----------
+        $useDeposit = config('rental.use_deposit'); // or config('app.use_deposit')
+
+        if ($useDeposit) {
+            // If car has fixed deposit only, force 'fixed'
+            $depositType = $car->is_security_deposit_fix
+                ? 'fixed'
+                : ($data['security_deposit'] ?? 'per_day');
+
+            if ($depositType === 'per_day') {
+                $securityDeposit = $car->security_deposit_per_day * $days;
+            } else {
+                $securityDeposit = $car->security_deposit_fixed;
+            }
+        } else {
+            // When deposit is disabled via .env/config
+            $securityDeposit = 0; // or null, depending on how you want to store it
+        }
 
         /* ------------- payload ------------- */
         $payload = [

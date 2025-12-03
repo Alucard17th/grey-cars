@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+    $currencySymbol = config('company.currency_symbol', '€');
+@endphp
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -10,8 +13,8 @@
                     <i class="bi bi-arrow-left me-2"></i> Back to Home
                 </a>
                 <div class="d-flex gap-3">
-                    <a href="{{ route('admin.reservations.print', $reservation) }}" 
-                    class="btn btn-outline-primary" target="_blank">
+                    <a href="{{ route('admin.reservations.print', $reservation) }}"
+                        class="btn btn-outline-primary" target="_blank">
                         <i class="bi bi-printer me-2"></i> Print Reservation
                     </a>
                 </div>
@@ -86,7 +89,6 @@
                                         <div class="flex-grow-1">
                                             <h4 class="mb-1">{{ $reservation->car->name }}</h4>
                                             <p class="text-muted mb-2">
-                                                {{ $reservation->car->year }}
                                                 <span style="color: {{ $reservation->car->color }}">
                                                     {{ $reservation->car->color_name }}
                                                 </span>
@@ -104,7 +106,7 @@
 
                                             <div class="d-flex align-items-center">
                                                 <span class="fs-4 fw-bold text-primary">
-                                                    ${{ number_format($reservation->car->price_per_day, 2) }}
+                                                    {{ number_format($reservation->car->price_per_day, 2) }}{{ $currencySymbol }}
                                                 </span>
                                                 <span class="ms-2 text-muted">/ day</span>
                                             </div>
@@ -152,12 +154,27 @@
                             <h3 class="h5 mb-0">Pricing Breakdown</h3>
                         </div>
                         <div class="card-body p-0">
+                            @php
+                            $basePrice = $reservation->car->price_per_day * $reservation->days;
+                            $extrasTotal = $reservation->extras_total ?? 0;
+
+                            $transportFee = shouldApplyTransportFee($reservation->pickup_location, $reservation->dropoff_location)
+                            ? config('company.fees.between_cities') * 1 // both ways
+                            : 0;
+
+                            $useDeposit = config('rental.use_deposit');
+                            $deposit = $useDeposit ? $reservation->security_deposit : 0;
+
+                            $subtotal = $basePrice + $extrasTotal + $transportFee;
+                            $total = $subtotal + $deposit;
+                            @endphp
+
                             <table class="table table-borderless mb-0">
                                 <tbody>
                                     <tr>
                                         <td class="ps-4">Base Price ({{ $reservation->days }} days)</td>
                                         <td class="text-end pe-4">
-                                            ${{ number_format($reservation->car->price_per_day * $reservation->days, 2) }}
+                                            {{ number_format($basePrice, 0) }}{{ $currencySymbol }}
                                         </td>
                                     </tr>
 
@@ -165,7 +182,7 @@
                                     <tr>
                                         <td class="ps-4 border-top">Extras</td>
                                         <td class="text-end pe-4 border-top">
-                                            ${{ number_format($reservation->extras_total, 2) }}
+                                            {{ number_format($extrasTotal, 0) }}{{ $currencySymbol }}
                                         </td>
                                     </tr>
                                     <tr>
@@ -174,7 +191,7 @@
                                                 @foreach(json_decode($reservation->extras, true) as $extra)
                                                 <div class="d-flex justify-content-between mb-1">
                                                     <span>{{ $extra['name'] }}</span>
-                                                    <span>${{ number_format($extra['total'], 2) }}</span>
+                                                    <span>{{ number_format($extra['total'], 0) }}{{ $currencySymbol }}</span>
                                                 </div>
                                                 @endforeach
                                             </div>
@@ -182,11 +199,11 @@
                                     </tr>
                                     @endif
 
-                                    @if(shouldApplyTransportFee($reservation->pickup_location, $reservation->dropoff_location))
+                                    @if($transportFee > 0)
                                     <tr>
                                         <td class="ps-4">Transport Fee</td>
                                         <td class="text-end pe-4">
-                                            ${{ number_format(config('company.fees.between_cities'), 2) * 2 }}
+                                            {{ number_format($transportFee, 0) }}{{ $currencySymbol }}
                                         </td>
                                     </tr>
                                     @endif
@@ -194,33 +211,30 @@
                                     <tr class="border-top">
                                         <td class="ps-4"><strong>Subtotal</strong></td>
                                         <td class="text-end pe-4">
-                                            <strong>${{ number_format($reservation->total_price, 2) }}</strong>
+                                            <strong>{{ number_format($subtotal, 0) }}{{ $currencySymbol }}</strong>
                                         </td>
                                     </tr>
 
+                                    @if($useDeposit)
                                     <tr>
                                         <td class="ps-4">Security Deposit</td>
                                         <td class="text-end pe-4">
-                                            ${{ number_format($reservation->security_deposit, 2) }}
+                                            {{ number_format($deposit, 0) }}{{ $currencySymbol }}
                                         </td>
                                     </tr>
+                                    @endif
 
                                     <tr class="bg-light">
                                         <td class="ps-4"><strong>Total Amount</strong></td>
                                         <td class="text-end pe-4">
-                                            @if(shouldApplyTransportFee($reservation->pickup_location, $reservation->dropoff_location))
                                             <strong class="text-primary">
-                                                ${{ number_format($reservation->total_price + $reservation->security_deposit + config('company.fees.between_cities') * 2 , 2) }}
+                                                {{ number_format($total, 0) }}{{ $currencySymbol }}
                                             </strong>
-                                            @else
-                                            <strong class="text-primary">
-                                                ${{ number_format($reservation->total_price + $reservation->security_deposit, 2) }}
-                                            </strong>
-                                            @endif
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
 
@@ -233,108 +247,108 @@
 
 @push('styles')
 <style>
-/* Timeline Styles */
-.timeline-steps {
-    display: flex;
-    justify-content: space-between;
-    padding: 0;
-    position: relative;
-}
-
-.timeline-steps::before {
-    content: "";
-    position: absolute;
-    top: 30px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--bs-primary) 0%, rgba(13, 110, 253, 0.1) 100%);
-}
-
-.timeline-step {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-.circle-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-}
-
-.timeline-content {
-    text-align: center;
-    padding: 0 1rem;
-}
-
-/* Card Enhancements */
-.card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Primary Light Color */
-.bg-primary-light {
-    background-color: rgba(13, 110, 253, 0.1);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
+    /* Timeline Styles */
     .timeline-steps {
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        position: relative;
     }
 
     .timeline-steps::before {
-        display: none;
+        content: "";
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--bs-primary) 0%, rgba(13, 110, 253, 0.1) 100%);
     }
 
     .timeline-step {
-        margin-bottom: 2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
     }
 
-    .d-flex.justify-content-between {
-        flex-direction: column;
-        gap: 1rem;
+    .circle-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     }
-}
+
+    .timeline-content {
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    /* Card Enhancements */
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Primary Light Color */
+    .bg-primary-light {
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .timeline-steps {
+            flex-direction: column;
+        }
+
+        .timeline-steps::before {
+            display: none;
+        }
+
+        .timeline-step {
+            margin-bottom: 2rem;
+        }
+
+        .d-flex.justify-content-between {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
 </style>
 @endpush
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Add to Calendar functionality
-    document.querySelector('.btn-primary').addEventListener('click', function() {
-        const startDate = new Date('{{ $reservation->pickup_date->format('
-            Y - m - d ') }}T{{ $reservation->pickup_time }}');
-        const endDate = new Date('{{ $reservation->dropoff_date->format('
-            Y - m - d ') }}T{{ $reservation->dropoff_time }}');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add to Calendar functionality
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            const startDate = new Date('{{ $reservation->pickup_date->format('
+                Y - m - d ') }}T{{ $reservation->pickup_time }}');
+            const endDate = new Date('{{ $reservation->dropoff_date->format('
+                Y - m - d ') }}T{{ $reservation->dropoff_time }}');
 
-        const event = {
-            title: 'Car Rental: {{ $reservation->car->name }}',
-            description: `Reservation #{{ $reservation->id }}\nPickup: {{ $reservation->pickup_location }}\nDropoff: {{ $reservation->dropoff_location }}`,
-            location: '{{ $reservation->pickup_location }}',
-            start: startDate,
-            end: endDate
-        };
+            const event = {
+                title: 'Car Rental: {{ $reservation->car->name }}',
+                description: `Reservation #{{ $reservation->id }}\nPickup: {{ $reservation->pickup_location }}\nDropoff: {{ $reservation->dropoff_location }}`,
+                location: '{{ $reservation->pickup_location }}',
+                start: startDate,
+                end: endDate
+            };
 
-        // Here you would implement actual calendar integration
-        alert('Add to calendar functionality would open here\n\n' +
-            JSON.stringify(event, null, 2));
+            // Here you would implement actual calendar integration
+            alert('Add to calendar functionality would open here\n\n' +
+                JSON.stringify(event, null, 2));
+        });
     });
-});
 </script>
 @endpush

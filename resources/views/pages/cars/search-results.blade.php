@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@php
+    $currencySymbol = config('company.currency_symbol', '€');
+@endphp
 @section('content')
 <div class="container py-5">
     <h1 class="mb-4 text-white">Available Cars</h1>
@@ -20,10 +22,10 @@
                     <div class="card-body">
                         <h3 class="h5">{{ $car->name }}</h3>
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Year: {{ $car->year }}</span>
+                            <!-- <span>Year: {{ $car->year }}</span> -->
                             <span class="badge bg-primary">{{ $car->type }}</span>
                         </div>
-                        <p class="mb-2"><strong>Price:</strong> ${{ $car->price_per_day }}/day</p>
+                        <p class="mb-2"><strong>Price:</strong> {{ number_format($car->price_per_day, 0) }}{{ $currencySymbol }}/day</p>
                         
                         <a href="{{ route('cars.book', ['car' => $car->id] + $searchParams) }}" 
                            class="btn btn-primary w-100">

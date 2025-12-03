@@ -1,3 +1,6 @@
+@php
+    $currencySymbol = config('company.currency_symbol', '€');
+@endphp
 @if($cars->count() > 0)
 <section class="py-5">
     <div class="container">
@@ -19,7 +22,7 @@
                                         alt="{{ $car->name }}">
                                     <div
                                         class="position-absolute top-0 end-0 bg-primary text-white px-2 py-1 m-2 rounded">
-                                        ${{ number_format($car->price_per_day, 2) }}/day
+                                        {{ number_format($car->price_per_day, 0)}}{{ $currencySymbol }}/day
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -44,7 +47,7 @@
 
                                         <span class="badge bg-black p-2 d-flex align-items-center">
                                             {!! car_icon($extra) !!}
-                                            {{ $extra }} (${{ $price }})</span>
+                                            {{ $extra }} ({{ number_format($price, 0) }}{{ $currencySymbol }})</span>
                                         @endforeach
                                     </div>
                                     @endif
@@ -82,7 +85,7 @@
                             <img src="{{ $car->image_url }}" class="card-img-top h-100 object-fit-cover"
                                 alt="{{ $car->name }}">
                             <div class="position-absolute top-0 end-0 bg-primary text-white px-2 py-1 m-2 rounded">
-                                ${{ number_format($car->price_per_day, 2) }}/day
+                                {{ number_format($car->price_per_day, 0) }}{{ $currencySymbol }}/day
                             </div>
                         </div>
                         <div class="card-body">
@@ -105,7 +108,7 @@
                                 @foreach($car->extras as $extra => $price)
                                 <span class="badge bg-black p-2 d-flex align-items-center">
                                     {!! car_icon($extra) !!}
-                                    {{ $extra }} (${{ $price }})</span>
+                                    {{ $extra }} ({{ number_format($price, 0) }}{{ $currencySymbol }})</span>
                                 @endforeach
                             </div>
                             @endif

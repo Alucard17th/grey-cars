@@ -40,7 +40,9 @@
 <body>
 
 <div class="wrap">
-
+    @php
+        $currencySymbol = config('company.currency_symbol', '€');
+    @endphp
     <!-- Header -->
     <div class="row mb-2">
         <div class="col-6">
@@ -86,7 +88,7 @@
                         <span style="color:{{ $reservation->car->color }}">{{ $reservation->car->color_name }}</span>
                     </td></tr>
                 <tr><td class="ps-0">Rate</td>
-                    <td>${{ number_format($reservation->car->price_per_day,2) }}/day</td></tr>
+                    <td>{{ number_format($reservation->car->price_per_day,2) }}{{ $currencySymbol }}/day</td></tr>
             </table>
             @if($reservation->car->options)
                 <div class="fs-90 mb-0"><span class="fw-600">Options:</span>
@@ -122,7 +124,7 @@
         <tr>
             <td class="ps-0">Base ({{ $reservation->days }} days)</td>
             <td class="text-end">
-                ${{ number_format($reservation->car->price_per_day * $reservation->days, 2) }}
+                {{ number_format($reservation->car->price_per_day * $reservation->days, 2) }}{{ $currencySymbol }}
             </td>
         </tr>
 
@@ -131,29 +133,29 @@
             <tr>
                 <td class="ps-0">Extras</td>
                 <td class="text-end">
-                    ${{ number_format($reservation->extras_total, 2) }}
+                    {{ number_format($reservation->extras_total, 2) }}{{ $currencySymbol }}
                 </td>
             </tr>
             @foreach($extras as $e)
                 <tr class="fs-90 muted">
                     <td class="ps-4">{{ $e['name'] }}</td>
-                    <td class="text-end">${{ number_format($e['total'],2) }}</td>
+                    <td class="text-end">{{ number_format($e['total'],2) }}{{ $currencySymbol }}</td>
                 </tr>
             @endforeach
         @endif
 
         <tr class="fw-600">
             <td class="ps-0">Subtotal</td>
-            <td class="text-end">${{ number_format($reservation->total_price, 2) }}</td>
+            <td class="text-end">{{ number_format($reservation->total_price, 2) }}{{ $currencySymbol }}</td>
         </tr>
         <tr>
             <td class="ps-0">Security deposit</td>
-            <td class="text-end">${{ number_format($reservation->security_deposit, 2) }}</td>
+            <td class="text-end">{{ number_format($reservation->security_deposit, 2) }}{{ $currencySymbol }}</td>
         </tr>
         <tr class="fw-600">
             <td class="ps-0">Total amount</td>
             <td class="text-end">
-                ${{ number_format($reservation->total_price + $reservation->security_deposit, 2) }}
+                {{ number_format($reservation->total_price + $reservation->security_deposit, 2) }}{{ $currencySymbol }}
             </td>
         </tr>
         </tbody>

@@ -21,6 +21,9 @@
     max-height: 225px;
 }
 </style>
+@php
+    $currencySymbol = config('company.currency_symbol', '€');
+@endphp
 <div class="container py-5">
     <div class="row g-4">
         @foreach($cars as $car)
@@ -31,10 +34,10 @@
                     <h3 class="h5">{{ $car->name }} <span class="text-muted fs-6">(or
                             similar)</span></h3>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Year: {{ $car->year }}</span>
+                        <!-- <span>Year: {{ $car->year }}</span> -->
                         <span class="badge bg-primary">{{ $car->type }}</span>
                     </div>
-                    <p class="mb-2"><strong>Price:</strong> ${{ $car->price_per_day }}/day</p>
+                    <p class="mb-2"><strong>Price:</strong> {{ number_format($car->price_per_day, 0) }}{{ $currencySymbol }}/day</p>
 
                     @if($car->options && count($car->options) > 0)
                     <h4 class="h5 fw-bold">Features:</h4>
@@ -51,7 +54,7 @@
                         @foreach($car->extras as $extra => $price)
                         <span class="badge bg-black p-2 d-flex align-items-center"><i
                                 class="bi {{ car_icon($extra) }} me-1 fs-5"></i>
-                            {{ $extra }} (${{ $price }})</span>
+                            {{ $extra }} ({{ number_format($price, 0) }}{{ $currencySymbol }})</span>
                         @endforeach
                     </div>
                     @endif
