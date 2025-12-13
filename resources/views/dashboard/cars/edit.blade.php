@@ -208,16 +208,8 @@
 
 @push('scripts')
 <script>
-let optionCounter = {
-    {
-        $optionCounter ?? 1
-    }
-};
-let extraCounter = {
-    {
-        $extraCounter ?? 1
-    }
-};
+let optionCounter = {{ $optionCounter ?? 1 }};
+let extraCounter = {{ $extraCounter ?? 1 }};
 
 document.getElementById('add-option').addEventListener('click', function() {
     optionCounter++;

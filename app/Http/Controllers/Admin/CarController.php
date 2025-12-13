@@ -96,7 +96,7 @@ class CarController extends Controller
     public function show(string $id)
     {
         //
-        $car = Car::find($id);
+        $car = Car::findOrFail($id);
         return view('dashboard.cars.show', compact('car'));
     }
 
@@ -106,7 +106,7 @@ class CarController extends Controller
     public function edit(string $id)
     {
         //
-        $car = Car::find($id);
+        $car = Car::findOrFail($id);
         return view('dashboard.cars.edit', compact('car'));
     }
 
@@ -178,6 +178,9 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $car = Car::findOrFail($id);
+        $car->delete();
+
+        return redirect()->route('admin.cars.index')->with('success', 'Car deleted successfully');
     }
 }

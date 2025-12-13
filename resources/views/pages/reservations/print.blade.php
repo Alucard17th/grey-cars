@@ -14,21 +14,27 @@
     table           { width:100%; border-collapse:collapse; font-size:12px; }
     td              { padding:var(--sp) 0; vertical-align:top; }
     .text-end       { text-align:right; }
+    .text-center    { text-align:center; }
     .muted          { color:#666; }
     .badge          { display:inline-block; padding:2px 6px; border-radius:3px; font-size:11px; }
     .bg-success     { background:#28a745; color:#fff; }
 
     /* -------- Layout helpers -------- */
-    .wrap           { width:100%; max-width:700px; margin:0 auto; padding:10mm 8mm; }
+    .wrap           { width:100%; max-width:700px; margin:0 auto; padding:10mm 8mm; min-height:100vh; display:flex; flex-direction:column; }
     .row            { display:flex; flex-wrap:wrap; margin:calc(-1*var(--sp)) 0 0; }
     .col-6          { width:50%; padding-top:var(--sp); }
+    .col-4          { width:33.3333%; padding-top:var(--sp); }
     .mb-0           { margin-bottom:0 !important; }
     .mb-1           { margin-bottom:var(--sp) !important; }
     .mb-2           { margin-bottom:calc(2*var(--sp)) !important; }
     .mb-3           { margin-bottom:calc(3*var(--sp)) !important; }
+    .mt-3           { margin-top:calc(3*var(--sp)) !important; }
     .ps-0           { padding-left:0 !important; }
     .fw-600         { font-weight:600; }
     .fs-90          { font-size:11px; }
+    .logo           { max-height:21mm; max-width:45mm; height:auto; width:auto; display:block; }
+    .header-row     { align-items:center; }
+    .footer         { margin-top:auto; }
 
     /* -------- Page/print settings -------- */
     @page { margin:10mm 8mm; }
@@ -42,16 +48,30 @@
 <div class="wrap">
     @php
         $currencySymbol = config('company.currency_symbol', '€');
+        $companyName = config('company.name', '');
+        $companyWebsite = config('company.website', '');
+        $companyLogo = config('company.logo', '');
+        $companyPhone = config('company.contact.phone', '');
+        $companyEmail = config('company.contact.email', '');
+        $companyWhatsapp = config('company.contact.whatsapp', '');
+        $companyAddress = config('company.contact.address', '');
     @endphp
     <!-- Header -->
-    <div class="row mb-2">
-        <div class="col-6">
+    <div class="row header-row mb-2">
+        <div class="col-4">
             <h2>Reservation #{{ $reservation->id }}</h2>
             <span class="badge bg-success">{{ ucfirst($reservation->status) }}</span>
         </div>
-        <div class="col-6 text-end fs-90">
-            Grey Cars Rental Co.<br>
-            www.mycarrental.com
+        <div class="col-4 text-center">
+            @if($companyLogo)
+                <img class="logo" src="{{ $companyLogo }}" alt="{{ $companyName ?: 'Company logo' }}">
+            @endif
+        </div>
+        <div class="col-4 text-end fs-90">
+            {{ $companyName ?: 'Grey Cars Rental Co.' }}
+            @if($companyWebsite)
+                <br>{{ $companyWebsite }}
+            @endif
         </div>
     </div>
     <hr class="mb-2">
@@ -83,10 +103,6 @@
             <h5 class="mb-1">Vehicle</h5>
             <table>
                 <tr><td class="ps-0">Model</td><td>{{ $reservation->car->name }}</td></tr>
-                <tr><td class="ps-0">Year/Color</td>
-                    <td>{{ $reservation->car->year }},
-                        <span style="color:{{ $reservation->car->color }}">{{ $reservation->car->color_name }}</span>
-                    </td></tr>
                 <tr><td class="ps-0">Rate</td>
                     <td>{{ number_format($reservation->car->price_per_day,2) }}{{ $currencySymbol }}/day</td></tr>
             </table>
@@ -145,24 +161,38 @@
         @endif
 
         <tr class="fw-600">
-            <td class="ps-0">Subtotal</td>
-            <td class="text-end">{{ number_format($reservation->total_price, 2) }}{{ $currencySymbol }}</td>
-        </tr>
-        <tr>
-            <td class="ps-0">Security deposit</td>
-            <td class="text-end">{{ number_format($reservation->security_deposit, 2) }}{{ $currencySymbol }}</td>
-        </tr>
-        <tr class="fw-600">
             <td class="ps-0">Total amount</td>
             <td class="text-end">
-                {{ number_format($reservation->total_price + $reservation->security_deposit, 2) }}{{ $currencySymbol }}
+                {{ number_format($reservation->total_price, 2) }}{{ $currencySymbol }}
             </td>
         </tr>
         </tbody>
     </table>
 
-    <div class="fs-90 muted mt-3">
-        Please present this confirmation and a valid driver’s licence when collecting your vehicle.
+    <div class="fs-90 muted mt-3 mb-3">
+        📩 We’ll contact you shortly to confirm your reservation by email or WhatsApp.
+        <br>
+        Please bring this confirmation and a valid driver’s licence when collecting your vehicle.
+    </div>
+
+    <hr class="mb-2 footer">
+    <div class="fs-90 muted footer">
+        {{ $companyName ?: 'Grey Cars Rental Co.' }}
+        @if($companyAddress)
+            <br>{{ $companyAddress }}
+        @endif
+        @if($companyPhone)
+            <br>Phone: {{ $companyPhone }}
+        @endif
+        @if($companyWhatsapp)
+            <br>WhatsApp: {{ $companyWhatsapp }}
+        @endif
+        @if($companyEmail)
+            <br>Email: {{ $companyEmail }}
+        @endif
+        @if($companyWebsite)
+            <br>Website: {{ $companyWebsite }}
+        @endif
     </div>
 
 </div>

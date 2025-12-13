@@ -159,7 +159,7 @@ class CarController extends Controller
             // Calculate days for pricing
             $pickup = Carbon::parse($validated['pickup_date']);
             $dropoff = Carbon::parse($validated['dropoff_date']);
-            $days = $pickup->diffInDays($dropoff) + 1;
+            $days = max(1, $pickup->diffInDays($dropoff));
 
             // Prepare extras data
             $selectedExtras = [];
@@ -236,6 +236,35 @@ class CarController extends Controller
                 $whatsAppNumber = preg_replace('/\D+/', '', $reservation->customer_phone); // keep only digits
                 $whatsAppLink   = "https://wa.me/{$whatsAppNumber}";
                 $sendTo = config('rental.send_order_to_email', '€');
+                $currencySymbol = config('rental.currency_symbol', '€');
+
+                $extras = $reservation->extras;
+                if (is_string($extras)) {
+                    $extras = json_decode($extras, true);
+                }
+                if (!is_array($extras)) {
+                    $extras = [];
+                }
+
+                $extrasHtml = '';
+                if (count($extras)) {
+                    $extrasHtml .= "<br><strong>Extras</strong><br>";
+                    foreach ($extras as $extra) {
+                        $name = $extra['name'] ?? '';
+                        $price = $extra['price'] ?? null;
+                        $total = $extra['total'] ?? null;
+
+                        $line = $name;
+                        if ($price !== null) {
+                            $line .= ' - ' . number_format((float) $price, 2) . $currencySymbol . '/day';
+                        }
+                        if ($total !== null) {
+                            $line .= ' (Total: ' . number_format((float) $total, 2) . $currencySymbol . ')';
+                        }
+
+                        $extrasHtml .= "- {$line}<br>";
+                    }
+                }
                 Mail::html("
                     New reservation #{$reservation->id}<br><br>
                     Car: {$reservation->car->name}<br>
@@ -245,8 +274,9 @@ class CarController extends Controller
                     Phone: <a href=\"{$whatsAppLink}\">WhatsApp {$reservation->customer_phone}</a><br><br>
                     Pickup: {$reservation->pickup_date->format('Y-m-d')} {$reservation->pickup_time} - {$reservation->pickup_location}<br>
                     Dropoff: {$reservation->dropoff_date->format('Y-m-d')} {$reservation->dropoff_time} - {$reservation->dropoff_location}<br><br>
-                    Extras total: {$reservation->extras_total}<br>
-                    Total price (without deposit): {$reservation->total_price}<br>
+                    Extras total: {$reservation->extras_total}{$currencySymbol}<br>
+                    {$extrasHtml}
+                    Total price: {$reservation->total_price}{$currencySymbol}<br>
                 ", function ($message) use ($reservation, $sendTo) {
                     $message->to($sendTo)
                             ->subject('New Reservation #' . $reservation->id);

@@ -102,7 +102,7 @@
 
                                 <div class="mb-4">
                                     <label for="customer_flight_number" class="form-label">Flight Number</label>
-                                    <input type="tel" name="customer_flight_number" id="customer_flight_number"
+                                    <input type="text" name="customer_flight_number" id="customer_flight_number"
                                         class="form-control" required>
                                 </div>
 

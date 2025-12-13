@@ -19,7 +19,7 @@
                 <td>{{ $r->car->name }}</td>
                 <td>{{ $r->customer_name }}</td>
                 <td>{{ $r->pickup_date->format('d M') }} – {{ $r->dropoff_date->format('d M') }}</td>
-                <td>{{ number_format($r->total_price,2) }}</td>
+                <td>{{ number_format($r->total_price,2) }}{{ config('rental.currency_symbol', '€') }}</td>
                 <td><span class="badge bg-info">{{ $r->status }}</span></td>
                 <td class="text-end">
                     <a class="btn btn-sm btn-outline-secondary" href="{{ route('admin.reservations.show',$r) }}">View</a>

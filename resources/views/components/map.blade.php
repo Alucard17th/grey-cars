@@ -41,7 +41,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-4 pt-3 border-top">
+                        <!-- <div class="mt-4 pt-3 border-top">
                             <h4 class="h5 mb-3">Opening Hours</h4>
                             <ul class="list-unstyled">
                                 <li class="d-flex justify-content-between mb-2">
@@ -57,7 +57,7 @@
                                     <span>10:00 - 16:00</span>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

@@ -60,6 +60,8 @@ class ReservationController extends Controller
             'special_requests'   => 'nullable|string',
             'extras'             => 'nullable|array',
             'extras.*'           => 'string',
+            'options'            => 'nullable|array',
+            'options.*'          => 'string',
             'security_deposit'   => 'nullable|in:per_day,fixed',
             'status'             => 'nullable|in:confirmed,pending,cancelled',
         ]);
@@ -129,6 +131,8 @@ class ReservationController extends Controller
             'special_requests'   => 'nullable|string',
             'extras'             => 'nullable|array',
             'extras.*'           => 'string',
+            'options'            => 'nullable|array',
+            'options.*'          => 'string',
             'security_deposit'   => 'nullable|in:per_day,fixed',
             'status'             => 'nullable|in:confirmed,pending,cancelled',
         ]);
@@ -137,8 +141,8 @@ class ReservationController extends Controller
     private function buildPayload(array $data, Car $car): array
     {
         $between_cities_fees = config('company.fees.between_cities');
-        $days = Carbon::parse($data['pickup_date'])
-                    ->diffInDays(Carbon::parse($data['dropoff_date'])) + 1;
+        $days = max(1, Carbon::parse($data['pickup_date'])
+                    ->diffInDays(Carbon::parse($data['dropoff_date'])));
 
         // ---------- extras ----------
         $extraArr    = [];
@@ -194,6 +198,7 @@ class ReservationController extends Controller
             'dropoff_time'        => $data['dropoff_time'],
             'special_requests'    => $data['special_requests'] ?? null,
             'extras'              => $extraArr,
+            'options'             => $data['options'] ?? [],
             'security_deposit'    => $securityDeposit,
             'status'              => $data['status'] ?? 'pending',
         ];
@@ -205,6 +210,7 @@ class ReservationController extends Controller
     {
         return response()->json([
             'extras'  => $car->extras  ?? [],
+            'options' => array_values($car->options ?? []),
         ]);
     }
 

@@ -28,7 +28,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $car->name }} <span class="text-muted fs-6">(or
                                             similar)</span></h5>
-                                    <p class="text-muted">{{ $car->year }}</p>
+                                    <!-- <p class="text-muted">{{ $car->year }}</p> -->
 
                                     @if($car->options && count($car->options) > 0)
                                     <h4 class="h5 fw-bold">Features:</h4>

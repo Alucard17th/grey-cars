@@ -3,8 +3,9 @@
 @section('content')
 @php
     // Helpers
-    $currency   = '€';                             // change to $, MAD, …
-    $extras     = $reservation->extras   ?? [];    // ← casted to array in model
+    $currency   = config('rental.currency_symbol', '€');
+    $extras     = is_string($reservation->extras ?? null) ? json_decode($reservation->extras, true) : ($reservation->extras ?? []);
+    $extras     = is_array($extras) ? $extras : [];
 @endphp
 
 <div class="container">

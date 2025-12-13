@@ -85,6 +85,11 @@
                         <p>GREY CARS reserves the right to modify these terms at any time. Changes will take effect immediately upon publication on the website.</p>
                     </div>
 
+                    <div class="mb-5">
+                        <h2 class="h4 text-primary mb-3">12. Lost Keys and Papers</h2>
+                        <p>In case of lost car keys or vehicle documents, a fee of 500 {{ config('rental.currency_symbol', '€') }} will be applied.</p>
+                    </div>
+
                     <!-- <div class="alert alert-light border mt-5">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="acceptTerms">

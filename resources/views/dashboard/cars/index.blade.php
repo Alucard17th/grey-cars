@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-3">Reservations</h2>
+    <h2 class="mb-3">Cars</h2>
     <a href="{{ route('admin.cars.create') }}" class="btn btn-primary mb-3">+ New</a>
 
     @if(session('success'))
@@ -33,9 +33,9 @@
                 </td>
                 <td>{{ $car->year }}</td>
                 <td>{{ $car->color }}</td>
-                <td>${{ number_format($car->price_per_day, 2) }}</td>
+                <td>{{ number_format($car->price_per_day, 2) }}{{ config('rental.currency_symbol', '€') }}</td>
                 <td>
-                    <a href="" class="btn btn-sm btn-outline-secondary">
+                    <a href="{{ route('admin.cars.show', $car->id) }}" class="btn btn-sm btn-outline-secondary">
                         View
                     </a>
                     <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-sm btn-outline-primary">

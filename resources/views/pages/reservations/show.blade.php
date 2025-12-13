@@ -208,12 +208,12 @@
                                     </tr>
                                     @endif
 
-                                    <tr class="border-top">
+                                    <!-- <tr class="border-top">
                                         <td class="ps-4"><strong>Subtotal</strong></td>
                                         <td class="text-end pe-4">
                                             <strong>{{ number_format($subtotal, 0) }}{{ $currencySymbol }}</strong>
                                         </td>
-                                    </tr>
+                                    </tr> -->
 
                                     @if($useDeposit)
                                     <tr>

@@ -36,7 +36,7 @@
     </div>
 
     <div class="col-md-4">
-        <label class="form-label">Customer name *</label>
+        <label class="form-label">Customer phone *</label>
         <input  type="text"
                 class="form-control @error('customer_phone') is-invalid @enderror"
                 name="customer_phone"
@@ -165,8 +165,28 @@ const extrasWrapper   = document.getElementById('extras-wrapper');
 const optionsWrapper  = document.getElementById('options-wrapper');
 
 // selections to “re-check” (editing / failed validation)
-const oldExtras   = {!! json_encode(old('extras', array_keys($reservation->extras ?? []))) !!};
-const oldOptions  = {!! json_encode(old('options',  $reservation->options ?? [])) !!};
+const oldExtras   = <?php
+    $reservationExtras = isset($reservation) ? ($reservation->extras ?? []) : [];
+    if (is_string($reservationExtras)) {
+        $reservationExtras = json_decode($reservationExtras, true);
+    }
+    if (!is_array($reservationExtras)) {
+        $reservationExtras = [];
+    }
+
+    echo json_encode(old('extras', array_keys($reservationExtras)));
+?>;
+const oldOptions  = <?php
+    $reservationOptions = isset($reservation) ? ($reservation->options ?? []) : [];
+    if (is_string($reservationOptions)) {
+        $reservationOptions = json_decode($reservationOptions, true);
+    }
+    if (!is_array($reservationOptions)) {
+        $reservationOptions = [];
+    }
+
+    echo json_encode(old('options', $reservationOptions));
+?>;
 
 // Initialise
 document.addEventListener('DOMContentLoaded', () => loadConfig(carSelect.value));
@@ -208,6 +228,7 @@ function renderCheckboxes({ extras = {}, options = {} })
 
     // Build HTML and inject --------------------------------------------------
     extrasWrapper.innerHTML  = buildSection('Extras',  extras , 'extras' , oldExtras );
+    optionsWrapper.innerHTML = buildSection('Options', options, 'options', oldOptions);
 }
 
 </script>

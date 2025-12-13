@@ -42,7 +42,7 @@ class Car extends Model
 
     public function calculateTotalPrice($pickupDate, $dropoffDate)
     {
-        $days = Carbon::parse($pickupDate)->diffInDays(Carbon::parse($dropoffDate)) + 1;
+        $days = Carbon::parse($pickupDate)->diffInDays(Carbon::parse($dropoffDate));
         return $this->price_per_day * $days;
     }
 }
