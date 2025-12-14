@@ -13,7 +13,7 @@
                     <i class="bi bi-arrow-left me-2"></i> Back to Home
                 </a>
                 <div class="d-flex gap-3">
-                    <a href="{{ route('admin.reservations.print', $reservation) }}"
+                    <a href="{{ route('reservations.print', $reservation) }}"
                         class="btn btn-outline-primary" target="_blank">
                         <i class="bi bi-printer me-2"></i> Print Reservation
                     </a>

@@ -24,8 +24,8 @@ Route::get('/reservations/{reservation}', [ReservationController::class, 'showFo
 
 // RESERVATIONS
 Route::get('/reservations/{reservation}/print', [ReservationController::class,'print'])
-    ->name('admin.reservations.print');
-    
+    ->name('reservations.print');
+
 // ADMIN
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
@@ -60,6 +60,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/ajax/cars/{car}/config', [ReservationController::class, 'carConfig'])
             ->name('ajax.car.config');
 
-        
+        Route::get('/reservations/{reservation}/print', [ReservationController::class,'print'])
+            ->name('admin.reservations.print');
     });
 });
