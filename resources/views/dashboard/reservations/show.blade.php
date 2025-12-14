@@ -8,24 +8,30 @@
     $extras     = is_array($extras) ? $extras : [];
 @endphp
 
-<div class="container">
+<div class="dash-card">
+    <div class="dash-card-header">
+        <div class="d-flex align-items-center gap-2">
+            <div class="text-primary"><i class="bi bi-receipt-cutoff fs-5"></i></div>
+            <div>
+                <div class="fw-semibold">Reservation #{{ $reservation->id }}</div>
+                <div class="small text-muted">Details & pricing</div>
+            </div>
+        </div>
 
-    {{-- PAGE TITLE --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">
-            <i class="bi bi-receipt-cutoff me-1"></i>
-            Reservation #{{ $reservation->id }}
-        </h2>
-
-        <div>
-            <a href="{{ route('admin.reservations.edit',$reservation) }}" class="btn btn-outline-primary me-2">
-                <i class="bi bi-pencil-square"></i> Edit
+        <div class="d-flex align-items-center gap-2">
+            <a href="{{ route('admin.reservations.index') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i>
             </a>
-            <a href="{{ route('admin.reservations.index') }}" class="btn btn-secondary">
-                <i class="bi bi-arrow-left-circle"></i> Back
+            <a href="{{ route('admin.reservations.print',$reservation) }}" class="btn btn-outline-dark btn-sm" target="_blank">
+                <i class="bi bi-printer"></i>
+            </a>
+            <a href="{{ route('admin.reservations.edit',$reservation) }}" class="btn btn-primary btn-sm">
+                <i class="bi bi-pencil-square me-1"></i>Edit
             </a>
         </div>
     </div>
+
+    <div class="dash-card-body">
 
     {{-- SUMMARY CARD --}}
     <div class="card mb-4 shadow-sm">
@@ -181,5 +187,6 @@
     </div>
     @endif
 
+    </div>
 </div>
 @endsection

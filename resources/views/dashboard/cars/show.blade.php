@@ -1,89 +1,125 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>Car Details: {{ $car->name }}</span>
-                    <div>
-                        <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-sm btn-warning">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                        <a href="{{ route('admin.cars.index') }}" class="btn btn-sm btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </a>
-                    </div>
-                </div>
+<div class="dash-card">
+    <div class="dash-card-header">
+        <div class="d-flex align-items-center gap-2">
+            <div class="text-primary"><i class="bi bi-car-front fs-5"></i></div>
+            <div>
+                <div class="fw-semibold">{{ $car->name }}</div>
+                <div class="small text-muted">Car details</div>
+            </div>
+        </div>
 
-                <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col-md-4 text-center">
-                            @if($car->image_url)
+        <div class="d-flex align-items-center gap-2">
+            <a href="{{ route('admin.cars.index') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-primary btn-sm">
+                <i class="bi bi-pencil-square me-1"></i>Edit
+            </a>
+        </div>
+    </div>
+
+    <div class="dash-card-body">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        @if($car->image_url)
                             <img src="{{ $car->image_url }}" alt="{{ $car->name }}" class="img-fluid rounded"
-                                style="max-height: 200px;">
-                            @else
-                            <div class="bg-light p-5 text-center">
-                                No Image Available
+                                style="width:100%;max-height:280px;object-fit:cover;">
+                        @else
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 220px;">
+                                <div class="text-muted">No image</div>
                             </div>
-                            @endif
-                        </div>
-                        <div class="col-md-8">
-                            <h3>{{ $car->name }}</h3>
-                            <p class="text-muted">{{ $car->year }} • {{ $car->color }}</p>
-                            <hr>
-                            <div class="row">
-                                <div class="col-6">
-                                    <p><strong>Price Per Day:</strong> {{ number_format($car->price_per_day, 2) }}{{ config('rental.currency_symbol', '€') }}</p>
-                                    @if($car->security_deposit_per_day)
-                                    <p><strong>Daily Deposit:</strong>
-                                        {{ number_format($car->security_deposit_per_day, 2) }}{{ config('rental.currency_symbol', '€') }}</p>
-                                    @endif
-                                </div>
-                                <div class="col-6">
-                                    @if($car->security_deposit_fixed)
-                                    <p><strong>Fixed Deposit:</strong>
-                                        {{ number_format($car->security_deposit_fixed, 2) }}{{ config('rental.currency_symbol', '€') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if($car->options)
-                    <div class="mb-4">
-                        <h5>Options</h5>
-                        <div class="card">
-                            <div class="card-body">
-                                <pre>{{ json_encode($car->options, JSON_PRETTY_PRINT) }}</pre>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-
-                    @if($car->extras)
-                    <div class="mb-4">
-                        <h5>Extras</h5>
-                        <div class="card">
-                            <div class="card-body">
-                                <pre>{{ json_encode($car->extras, JSON_PRETTY_PRINT) }}</pre>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-
-                    <div class="row">
-                        <div class="col-6">
-                            <small class="text-muted">Created: {{ $car->created_at->format('M d, Y H:i') }}</small>
-                        </div>
-                        <div class="col-6 text-end">
-                            <small class="text-muted">Updated: {{ $car->updated_at->format('M d, Y H:i') }}</small>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
 
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                            <div>
+                                <div class="h5 mb-1">{{ $car->name }}</div>
+                                <div class="text-muted">{{ $car->year }}</div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="rounded-circle" style="width:12px;height:12px;background:{{ $car->color }}"></span>
+                                <span class="text-muted">{{ $car->color }}</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row gy-2">
+                            <div class="col-md-6">
+                                <div class="text-muted small">Price per day</div>
+                                <div class="fw-semibold">
+                                    {{ number_format($car->price_per_day, 2) }}{{ config('rental.currency_symbol', '€') }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-muted small">Deposit mode</div>
+                                <div class="fw-semibold">
+                                    {{ $car->is_security_deposit_fix ? 'Fixed only' : 'Flexible' }}
+                                </div>
+                            </div>
+                            @if($car->security_deposit_per_day)
+                                <div class="col-md-6">
+                                    <div class="text-muted small">Daily deposit</div>
+                                    <div class="fw-semibold">
+                                        {{ number_format($car->security_deposit_per_day, 2) }}{{ config('rental.currency_symbol', '€') }}
+                                    </div>
+                                </div>
+                            @endif
+                            @if($car->security_deposit_fixed)
+                                <div class="col-md-6">
+                                    <div class="text-muted small">Fixed deposit</div>
+                                    <div class="fw-semibold">
+                                        {{ number_format($car->security_deposit_fixed, 2) }}{{ config('rental.currency_symbol', '€') }}
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            @if($car->options)
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white fw-semibold">
+                            <i class="bi bi-sliders me-1"></i> Options
+                        </div>
+                        <div class="card-body">
+                            <pre class="mb-0">{{ json_encode($car->options, JSON_PRETTY_PRINT) }}</pre>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if($car->extras)
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white fw-semibold">
+                            <i class="bi bi-plus-circle me-1"></i> Extras
+                        </div>
+                        <div class="card-body">
+                            <pre class="mb-0">{{ json_encode($car->extras, JSON_PRETTY_PRINT) }}</pre>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+
+        <div class="d-flex justify-content-between mt-4 small text-muted">
+            <div>Created: {{ $car->created_at->format('M d, Y H:i') }}</div>
+            <div>Updated: {{ $car->updated_at->format('M d, Y H:i') }}</div>
         </div>
     </div>
 </div>
