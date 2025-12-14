@@ -204,10 +204,8 @@ class CarController extends Controller
             }
 
             // Between cities fees
-            $between_cities_fee = 0;
-            if(shouldApplyTransportFee($request['pickup_location'], $request['dropoff_location'])) {
-                $between_cities_fee = config('company.fees.between_cities');
-            }
+            $betweenCitiesMultiplier = shouldApplyTransportFee($request['pickup_location'], $request['dropoff_location']);
+            $between_cities_fee = config('company.fees.between_cities') * $betweenCitiesMultiplier;
 
             // Create reservation
             $reservation = $car->reservations()->create([

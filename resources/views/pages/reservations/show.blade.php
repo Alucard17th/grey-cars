@@ -158,9 +158,8 @@
                             $basePrice = $reservation->car->price_per_day * $reservation->days;
                             $extrasTotal = $reservation->extras_total ?? 0;
 
-                            $transportFee = shouldApplyTransportFee($reservation->pickup_location, $reservation->dropoff_location)
-                            ? config('company.fees.between_cities') * 1 // both ways
-                            : 0;
+                            $betweenCitiesMultiplier = shouldApplyTransportFee($reservation->pickup_location, $reservation->dropoff_location);
+                            $transportFee = config('company.fees.between_cities') * $betweenCitiesMultiplier;
 
                             $useDeposit = config('rental.use_deposit');
                             $deposit = $useDeposit ? $reservation->security_deposit : 0;

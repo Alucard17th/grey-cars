@@ -3,6 +3,7 @@
 @section('content')
 @php
     $currencySymbol = config('company.currency_symbol', '€');
+    $betweenCitiesMultiplier = shouldApplyTransportFee($searchParams['pickup_location'], $searchParams['dropoff_location']);
 @endphp
 <div class="container py-5">
     <div class="row justify-content-center">
@@ -181,8 +182,7 @@
                                     </div>
                                 </div>
 
-                                @if(shouldApplyTransportFee($searchParams['pickup_location'],
-                                $searchParams['dropoff_location']))
+                                @if($betweenCitiesMultiplier > 0)
                                 <div class="alert alert-warning" role="alert">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="accept_transport_fee"
@@ -193,7 +193,7 @@
                                             {{ $searchParams['dropoff_location'] }}).
                                             <span class="fw-semibold">An additional transport fee of
                                                 <span
-                                                    class="fw-bold">{{ config('company.fees.between_cities') }}{{ $currencySymbol }}</span>
+                                                    class="fw-bold">{{ config('company.fees.between_cities') * $betweenCitiesMultiplier }}{{ $currencySymbol }}</span>
                                                 will apply</span>
                                             to cover vehicle relocation between locations.
                                         </label>
