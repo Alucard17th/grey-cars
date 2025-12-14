@@ -22,6 +22,10 @@ Route::get('/cars/{car}/json-book', [CarController::class, 'jsonBook'])->name('c
 Route::post('/cars/{car}/book', [CarController::class, 'storeBooking'])->name('cars.book.store');
 Route::get('/reservations/{reservation}', [ReservationController::class, 'showForClient'])->name('reservations.show');
 
+// RESERVATIONS
+Route::get('/reservations/{reservation}/print', [ReservationController::class,'print'])
+    ->name('admin.reservations.print');
+    
 // ADMIN
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
@@ -56,7 +60,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/ajax/cars/{car}/config', [ReservationController::class, 'carConfig'])
             ->name('ajax.car.config');
 
-        Route::get('/reservations/{reservation}/print', [ReservationController::class,'print'])
-            ->name('admin.reservations.print');
+        
     });
 });
