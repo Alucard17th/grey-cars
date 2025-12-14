@@ -52,7 +52,13 @@
                             </div>
                         </div>
 
-                        <hr>
+                        @if($car->description)
+                            <div class="text-muted small">Description</div>
+                            <div class="mb-0">{{ $car->description }}</div>
+                            <hr>
+                        @else
+                            <hr>
+                        @endif
 
                         <div class="row gy-2">
                             <div class="col-md-6">

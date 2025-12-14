@@ -313,6 +313,7 @@ class CarController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
             'color' => 'required|string|max:100',
             'price_per_day' => 'required|numeric|min:0',
@@ -368,6 +369,7 @@ class CarController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
             'color' => 'required|string|max:100',
             'price_per_day' => 'required|numeric|min:0',

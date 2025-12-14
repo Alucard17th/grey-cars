@@ -80,6 +80,13 @@
                                 <input type="hidden" name="pickup_time" value="{{ $searchParams['pickup_time'] }}">
                                 <input type="hidden" name="dropoff_time" value="{{ $searchParams['dropoff_time'] }}">
 
+                                @if($car->description)
+                                <div class="mb-4">
+                                    <h3 class="h5 mb-2">Description</h3>
+                                    <div class="text-muted">{{ $car->description }}</div>
+                                </div>
+                                @endif
+
                                 <h3 class="h4 mb-4">Your Information</h3>
 
                                 <div class="mb-3">
