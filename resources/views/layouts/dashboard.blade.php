@@ -250,7 +250,13 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <form method="POST" action="" onsubmit="return confirm('Are you sure you want to logout?');">
+                                    <a class="dropdown-item" href="{{ route('admin.password.change') }}">
+                                        <i class="bi bi-shield-check me-2"></i>Change password
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="POST" action="{{ route('admin.logout') }}" onsubmit="return confirm('Are you sure you want to logout?');">
                                         @csrf
                                         <button type="submit" class="dropdown-item text-danger">
                                             <i class="bi bi-box-arrow-right me-2"></i>Logout
