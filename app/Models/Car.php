@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Car extends Model
 {
@@ -18,7 +19,19 @@ class Car extends Model
     // Accessor for the full image path
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset( $this->image ) : asset('images/default-car.jpg');
+        if (!$this->image) {
+            return asset('images/default-car.jpg');
+        }
+
+        if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+            return $this->image;
+        }
+
+        if (str_starts_with($this->image, 'images/')) {
+            return asset($this->image);
+        }
+
+        return Storage::disk('public')->url($this->image);
     }
 
     public function reservations()
