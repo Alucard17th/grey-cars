@@ -31,6 +31,10 @@ class Car extends Model
             return asset($this->image);
         }
 
+        if (str_starts_with($this->image, 'cars/')) {
+            return asset('images/' . $this->image);
+        }
+
         return Storage::disk('public')->url($this->image);
     }
 

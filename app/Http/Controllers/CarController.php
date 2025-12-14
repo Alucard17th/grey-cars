@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
@@ -327,7 +328,10 @@ class CarController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('cars', 'public');
+            File::ensureDirectoryExists(public_path('images/cars'));
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->move(public_path('images/cars'), $filename);
+            $validated['image'] = 'images/cars/' . $filename;
         }
 
         $validated['options'] = $request->input('options') ?: [];
@@ -383,9 +387,17 @@ class CarController extends Controller
         if ($request->hasFile('image')) {
             // Delete old image if exists
             if ($car->image) {
-                Storage::disk('public')->delete($car->image);
+                if (str_starts_with($car->image, 'images/')) {
+                    File::delete(public_path($car->image));
+                } else {
+                    Storage::disk('public')->delete($car->image);
+                }
             }
-            $validated['image'] = $request->file('image')->store('cars', 'public');
+
+            File::ensureDirectoryExists(public_path('images/cars'));
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->move(public_path('images/cars'), $filename);
+            $validated['image'] = 'images/cars/' . $filename;
         }
 
         $validated['options'] = $request->input('options') ?: [];

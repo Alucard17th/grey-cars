@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -76,7 +78,10 @@ class CarController extends Controller
 
             // Handle file upload
             if ($request->hasFile('image')) {
-                $validated['image'] = $request->file('image')->store('cars', 'public');
+                File::ensureDirectoryExists(public_path('images/cars'));
+                $filename = $request->file('image')->hashName();
+                $request->file('image')->move(public_path('images/cars'), $filename);
+                $validated['image'] = 'images/cars/' . $filename;
             }
 
             $car = Car::create([
@@ -160,7 +165,18 @@ class CarController extends Controller
 
         // Handle file upload
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('cars', 'public');
+            if ($car && $car->image) {
+                if (str_starts_with($car->image, 'images/')) {
+                    File::delete(public_path($car->image));
+                } else {
+                    Storage::disk('public')->delete($car->image);
+                }
+            }
+
+            File::ensureDirectoryExists(public_path('images/cars'));
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->move(public_path('images/cars'), $filename);
+            $validated['image'] = 'images/cars/' . $filename;
         }
 
         $isFixed = $request->has('is_security_deposit_fix') ? 1 : 0;
