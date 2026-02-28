@@ -10,15 +10,7 @@
                             Pickup Location</label>
                         <select name="pickup_location" id="pickup_location"
                             class="form-select @error('pickup_location') is-invalid @enderror" required>
-                            @php
-                            $locations = [
-                            'Agadir Airport - AL MASSIRA',
-                            'Marrakech Airport - AL MENARA',
-                            'Essaouira Airport - MOGADOR',
-                            'Taghazout',
-                            'Grey Cars Rental Agency'
-                            ];
-                            @endphp
+                            @php($locations = config('rental.locations', []))
                             @foreach($locations as $location)
                             <option value="{{ $location }}" {{ old('pickup_location') == $location ? 'selected' : '' }}>
                                 {{ $location }}

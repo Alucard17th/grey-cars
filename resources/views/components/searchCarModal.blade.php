@@ -12,22 +12,19 @@
                         <div class="col-md-6">
                             <label for="pickup_location" class="form-label">Pickup Location</label>
                             <select name="pickup_location" id="pickup_location" class="form-select" required>
-                                <option value="Agadir Airport - Al Massira">Agadir Airport - Al Massira</option>
-                                <option value="Marrakech Airport - Menara">Marrakech Airport - Menara</option>
-                                <option value="Essaouira Airport - Mogador">Essaouira Airport - Mogador</option>
-                                <option value="Taghazout">Taghazout</option>
-                                <option value="Grey Cars Rental">Grey Cars Rental Agency</option>
+                                @php($locations = config('rental.locations', []))
+                                @foreach($locations as $location)
+                                    <option value="{{ $location }}">{{ $location }}</option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="col-md-6">
                             <label for="dropoff_location" class="form-label">Drop Off Location</label>
                             <select name="dropoff_location" id="dropoff_location" class="form-select" required>
-                                <option value="Agadir Airport - Al Massira">Agadir Airport - Al Massira</option>
-                                <option value="Marrakech Airport - Menara">Marrakech Airport - Menara</option>
-                                <option value="Essaouira Airport - Mogador">Essaouira Airport - Mogador</option>
-                                <option value="Taghazout">Taghazout</option>
-                                <option value="Grey Cars Rental">Grey Cars Rental Agency</option>
+                                @foreach($locations as $location)
+                                    <option value="{{ $location }}">{{ $location }}</option>
+                                @endforeach
                             </select>
                         </div>
 
