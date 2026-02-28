@@ -3,6 +3,14 @@
 if (!function_exists('shouldApplyTransportFee')) {
     function shouldApplyTransportFee(string $pickup, string $dropoff): int
     {
+        $normalizeLocation = static function (string $value): string {
+            $value = preg_replace('/\s+/', ' ', trim($value));
+            return mb_strtoupper($value);
+        };
+
+        $pickupNormalized = $normalizeLocation($pickup);
+        $dropoffNormalized = $normalizeLocation($dropoff);
+
         $localCombinations = [
             'Agadir Airport - AL MASSIRA' => ['Taghazout', 'Grey Cars Rental Agency'],
             'Taghazout' => ['Grey Cars Rental Agency'],
@@ -11,20 +19,20 @@ if (!function_exists('shouldApplyTransportFee')) {
 
         $localLocations = [];
         foreach ($localCombinations as $from => $toLocations) {
-            $localLocations[$from] = true;
+            $localLocations[$normalizeLocation($from)] = true;
             foreach ($toLocations as $to) {
-                $localLocations[$to] = true;
+                $localLocations[$normalizeLocation($to)] = true;
             }
         }
 
-        $pickupIsLocal = isset($localLocations[$pickup]);
-        $dropoffIsLocal = isset($localLocations[$dropoff]);
+        $pickupIsLocal = isset($localLocations[$pickupNormalized]);
+        $dropoffIsLocal = isset($localLocations[$dropoffNormalized]);
 
         if ($pickupIsLocal && $dropoffIsLocal) {
             return 0;
         }
 
-        if ($pickup === $dropoff) {
+        if ($pickupNormalized === $dropoffNormalized) {
             return 2;
         }
 
