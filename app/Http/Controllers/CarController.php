@@ -270,6 +270,7 @@ class CarController extends Controller
                     Days: {$reservation->days}<br>
                     Customer: {$reservation->customer_name}<br>
                     Email: {$reservation->customer_email}<br>
+                    Flight number: {$reservation->customer_flight_number}<br>
                     Phone: <a href=\"{$whatsAppLink}\">WhatsApp {$reservation->customer_phone}</a><br><br>
                     Pickup: {$reservation->pickup_date->format('Y-m-d')} {$reservation->pickup_time} - {$reservation->pickup_location}<br>
                     Dropoff: {$reservation->dropoff_date->format('Y-m-d')} {$reservation->dropoff_time} - {$reservation->dropoff_location}<br><br>

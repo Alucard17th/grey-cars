@@ -44,10 +44,10 @@
                                     <h4 class="h5 fw-bold">Extras:</h4>
                                     <div class="d-flex flex-wrap gap-2 mb-3">
                                         @foreach($car->extras as $extra => $price)
-
                                         <span class="badge bg-black p-2 d-flex align-items-center">
                                             {!! car_icon($extra) !!}
-                                            {{ $extra }} ({{ number_format($price, 0) }}{{ $currencySymbol }})</span>
+                                            @php($normalizedPrice = is_numeric($price) ? (float) $price : (float) preg_replace('/[^0-9.\-]/', '', (string) $price))
+                                            {{ $extra }} ({{ number_format($normalizedPrice, 0) }}{{ $currencySymbol }})</span>
                                         @endforeach
                                     </div>
                                     @endif
@@ -91,8 +91,6 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $car->name }} <span class="text-muted fs-6">(or
                                     similar)</span></h5>
-                            <p class="text-muted">{{ $car->year }} • <span
-                                    style="color: {{ $car->color }}">{{ $car->color }}</span></p>
                             @if($car->options && count($car->options) > 0)
                             <h4 class="h5 fw-bold">Features:</h4>
                             <div class="d-flex flex-wrap gap-2 mb-3">
@@ -108,7 +106,8 @@
                                 @foreach($car->extras as $extra => $price)
                                 <span class="badge bg-black p-2 d-flex align-items-center">
                                     {!! car_icon($extra) !!}
-                                    {{ $extra }} ({{ number_format($price, 0) }}{{ $currencySymbol }})</span>
+                                    @php($normalizedPrice = is_numeric($price) ? (float) $price : (float) preg_replace('/[^0-9.\-]/', '', (string) $price))
+                                    {{ $extra }} ({{ number_format($normalizedPrice, 0) }}{{ $currencySymbol }})</span>
                                 @endforeach
                             </div>
                             @endif
