@@ -100,59 +100,84 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white pt-5 pb-3">
-        <div class="container">
-            <div class="row g-4">
-                <!-- Company Info -->
-                <div class="col-lg-4 col-md-6">
-                    <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" class="img-fluid mb-3">
-                    <h5 class="text-uppercase mb-4" style="font-family: 'Oswald', sans-serif;">{{ config('app.name', 'Laravel') }}</h5>
-                    <p>Premium vehicle solutions for discerning clients. Experience the road in unparalleled style and
-                        comfort.</p>
-                    <div class="mt-4">
-                        <a href="{{ config('company.contact.facebook') }}" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="{{ config('company.contact.instagram') }}" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                        <a href="{{ config('company.contact.twitter') }}" class="text-white me-3"><i class="bi bi-twitter-x"></i></a>
-                        <a href="{{ config('company.contact.linkedin') }}" class="text-white"><i class="bi bi-linkedin"></i></a>
+    <footer class="footer-modern">
+        <!-- CTA strip -->
+        <div class="footer-cta">
+            <div class="container">
+                <div class="footer-cta-inner">
+                    <div>
+                        <h3 class="mb-1">Ready to hit the road?</h3>
+                        <p class="mb-0 opacity-75">Book your perfect ride in minutes — pickup at the airport or anywhere in Agadir.</p>
                     </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="col-lg-4 col-md-6">
-                    <h5 class="text-uppercase mb-4" style="font-family: 'Oswald', sans-serif;">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('home') }}" class="text-white text-decoration-none">Home</a></li>
-                        <li class="mb-2"><a href="{{ route('cars.index') }}" class="text-white text-decoration-none">Our Cars</a></li>
-                        <li class="mb-2"><a href="{{ route('about') }}" class="text-white text-decoration-none">About Us</a></li>
-                        <li class="mb-2"><a href="{{ route('terms-and-conditions') }}" class="text-white text-decoration-none">Terms and Conditions</a></li>
-                        <li class="mb-2"><a href="{{ route('contact') }}" class="text-white text-decoration-none">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="col-lg-4 col-md-6">
-                    <h5 class="text-uppercase mb-4" style="font-family: 'Oswald', sans-serif;">Contact Us</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-geo-alt-fill me-2"></i> {{ config('company.contact.address') }}</li>
-                        <li class="mb-2"><i class="bi bi-telephone-fill me-2"></i> {{ config('company.contact.phone') }}</li>
-                        <li class="mb-2"><i class="bi bi-envelope-fill me-2"></i> {{ config('company.contact.email') }}</li>
-                        <li class="mb-2"><i class="bi bi-clock-fill me-2"></i> {{ config('company.contact.hours') }}</li>
-                    </ul>
+                    <a href="{{ route('cars.index') }}" class="btn btn-light footer-cta-btn">
+                        <i class="bi bi-car-front-fill me-2"></i>Browse Fleet
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
                 </div>
             </div>
+        </div>
 
-            <hr class="my-4 bg-secondary">
+        <div class="footer-main">
+            <div class="container">
+                <div class="row g-5">
+                    <!-- Brand -->
+                    <div class="col-lg-4 col-md-6">
+                        <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" class="footer-logo mb-3">
+                        <p class="footer-text">Premium vehicle solutions for discerning clients. Experience the road in unparalleled style and comfort.</p>
 
-            <!-- Copyright -->
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; {{ date('Y') }} Luxury Car Rentals. All rights reserved.</p>
+                        <div class="footer-socials">
+                            <a href="{{ config('company.contact.facebook') }}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="{{ config('company.contact.instagram') }}" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="{{ config('company.contact.twitter') }}" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+                            <a href="{{ config('company.contact.linkedin') }}" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="col-lg-3 col-md-6">
+                        <h6 class="footer-heading">Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="{{ route('home') }}"><i class="bi bi-chevron-right"></i> Home</a></li>
+                            <li><a href="{{ route('cars.index') }}"><i class="bi bi-chevron-right"></i> Our Cars</a></li>
+                            <li><a href="{{ route('about') }}"><i class="bi bi-chevron-right"></i> About Us</a></li>
+                            <li><a href="{{ route('terms-and-conditions') }}"><i class="bi bi-chevron-right"></i> Terms &amp; Conditions</a></li>
+                            <li><a href="{{ route('contact') }}"><i class="bi bi-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="col-lg-5 col-md-6">
+                        <h6 class="footer-heading">Get in Touch</h6>
+                        <ul class="footer-contact">
+                            <li>
+                                <span class="footer-contact-icon"><i class="bi bi-geo-alt-fill"></i></span>
+                                <span>{{ config('company.contact.address') }}</span>
+                            </li>
+                            <li>
+                                <a href="tel:{{ config('company.contact.phone') }}">
+                                    <span class="footer-contact-icon"><i class="bi bi-telephone-fill"></i></span>
+                                    <span>{{ config('company.contact.phone') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:{{ config('company.contact.email') }}">
+                                    <span class="footer-contact-icon"><i class="bi bi-envelope-fill"></i></span>
+                                    <span>{{ config('company.contact.email') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <span class="footer-contact-icon"><i class="bi bi-clock-fill"></i></span>
+                                <span>{{ config('company.contact.hours') }}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- <div class="col-md-6 text-center text-md-end">
-                    <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
-                    <a href="#" class="text-white text-decoration-none me-3">Terms of Service</a>
-                    <a href="#" class="text-white text-decoration-none">FAQ</a>
-                </div> -->
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <p class="mb-0 small">&copy; {{ date('Y') }} {{ config('app.name', 'Grey Cars') }}. All rights reserved.</p>
             </div>
         </div>
     </footer>
