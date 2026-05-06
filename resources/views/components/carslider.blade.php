@@ -5,8 +5,9 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5 text-white">
-            <h2 class="fw-bold">OUR CARS</h2>
-            <p class="lead text-white">Browse our selection of premium vehicles</p>
+            <span class="section-eyebrow">Our Fleet</span>
+            <h2 class="fw-bold">Our Cars</h2>
+            <p class="text-light opacity-75 mx-auto" style="max-width:560px;">Browse our selection of premium vehicles — comfort, style and reliability for every journey.</p>
         </div>
 
         <div id="carSlider" class="carousel slide d-none d-md-block">
@@ -16,49 +17,7 @@
                     <div class="row g-4">
                         @foreach($chunk as $car)
                         <div class="col-md-4">
-                            <div class="card h-100 shadow-sm border-0 overflow-hidden">
-                                <div class="" style="height: 200px; overflow: hidden; position: relative !important;">
-                                    <img src="{{ $car->image_url }}" class="card-img-top h-100 object-fit-cover"
-                                        alt="{{ $car->name }}">
-                                    <div
-                                        class="position-absolute top-0 end-0 bg-primary text-white px-2 py-1 m-2 rounded">
-                                        {{ number_format($car->price_per_day, 0)}}{{ $currencySymbol }}/day
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $car->name }} <span class="text-muted fs-6">(or
-                                            similar)</span></h5>
-                                    <!-- <p class="text-muted">{{ $car->year }}</p> -->
-
-                                    @if($car->options && count($car->options) > 0)
-                                    <h4 class="h5 fw-bold">Features:</h4>
-                                    <div class="d-flex flex-wrap gap-2 mb-3">
-                                        @foreach($car->options as $option)
-                                        <span class="badge bg-black p-2 d-flex align-items-center">
-                                            {!! car_icon($option) !!} 
-                                            {{ $option }}</span>
-                                        @endforeach
-                                    </div>
-                                    @endif
-                                    @if($car->extras && count($car->extras) > 0)
-                                    <h4 class="h5 fw-bold">Extras:</h4>
-                                    <div class="d-flex flex-wrap gap-2 mb-3">
-                                        @foreach($car->extras as $extra => $price)
-                                        <span class="badge bg-black p-2 d-flex align-items-center">
-                                            {!! car_icon($extra) !!}
-                                            @php($normalizedPrice = is_numeric($price) ? (float) $price : (float) preg_replace('/[^0-9.\-]/', '', (string) $price))
-                                            {{ $extra }} ({{ number_format($normalizedPrice, 0) }}{{ $currencySymbol }})</span>
-                                        @endforeach
-                                    </div>
-                                    @endif
-                                </div>
-                                <div class="card-footer bg-white border-0">
-                                    <div class="d-grid">
-                                        <a href="#" class="btn btn-primary book-now-btn" data-car-id="{{ $car->id }}"
-                                            data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('components.partials.car-card', ['car' => $car, 'currencySymbol' => $currencySymbol])
                         </div>
                         @endforeach
                     </div>
@@ -80,44 +39,8 @@
             <div class="carousel-inner">
                 @foreach($cars as $car)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                    <div class="card h-100 shadow-sm border-0 overflow-hidden mx-3">
-                        <div class="" style="height: 200px; overflow: hidden; position: relative !important;">
-                            <img src="{{ $car->image_url }}" class="card-img-top h-100 object-fit-cover"
-                                alt="{{ $car->name }}">
-                            <div class="position-absolute top-0 end-0 bg-primary text-white px-2 py-1 m-2 rounded">
-                                {{ number_format($car->price_per_day, 0) }}{{ $currencySymbol }}/day
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $car->name }} <span class="text-muted fs-6">(or
-                                    similar)</span></h5>
-                            @if($car->options && count($car->options) > 0)
-                            <h4 class="h5 fw-bold">Features:</h4>
-                            <div class="d-flex flex-wrap gap-2 mb-3">
-                                @foreach($car->options as $option)
-                                <span class="badge bg-black p-2 d-flex align-items-center">
-                                    {!! car_icon($option) !!} {{ $option }}</span>
-                                @endforeach
-                            </div>
-                            @endif
-                            @if($car->extras && count($car->extras) > 0)
-                            <h4 class="h5 fw-bold">Extras:</h4>
-                            <div class="d-flex flex-wrap gap-2 mb-3">
-                                @foreach($car->extras as $extra => $price)
-                                <span class="badge bg-black p-2 d-flex align-items-center">
-                                    {!! car_icon($extra) !!}
-                                    @php($normalizedPrice = is_numeric($price) ? (float) $price : (float) preg_replace('/[^0-9.\-]/', '', (string) $price))
-                                    {{ $extra }} ({{ number_format($normalizedPrice, 0) }}{{ $currencySymbol }})</span>
-                                @endforeach
-                            </div>
-                            @endif
-                        </div>
-                        <div class="card-footer bg-white border-0">
-                            <div class="d-grid">
-                                <a href="#" class="btn btn-primary book-now-btn" data-car-id="{{ $car->id }}"
-                                    data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a>
-                            </div>
-                        </div>
+                    <div class="mx-3">
+                        @include('components.partials.car-card', ['car' => $car, 'currencySymbol' => $currencySymbol])
                     </div>
                 </div>
                 @endforeach

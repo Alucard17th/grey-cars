@@ -1,5 +1,5 @@
 <section class="hero-slider">
-    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
@@ -11,13 +11,19 @@
             <div class="carousel-item active" style="background-image: url('{{ asset('images/slider/car-cards.png') }}');">
                 <div class="carousel-overlay"></div>
                 <div class="container h-100">
-                    <div class="row align-items-center min-vh-75 py-5">
-                        <div class="col-lg-7 text-white pt-5 mt-5">
-                            <span class="badge bg-primary bg-opacity-75 px-3 py-2 mb-3 text-uppercase" style="letter-spacing:2px; font-size:.7rem;">Premium Car Rentals · Agadir</span>
-                            <h1 class="display-4 fw-bold mb-3 text-uppercase">Affordable Car Rentals</h1>
-                            <p class="lead mb-4">Get the best value for your trip with transparent pricing, flexible options, and top-notch service you can trust.</p>
-                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg me-2">Browse Fleet</a>
-                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                    <div class="row align-items-center hero-row">
+                        <div class="col-lg-8 col-xl-7 text-white hero-content">
+                            <span class="hero-eyebrow"><span class="dot"></span> Premium Car Rentals · Agadir</span>
+                            <h1 class="hero-title">Drive Morocco <span class="hero-title-accent">Your Way</span></h1>
+                            <p class="hero-lead">Get the best value for your trip with transparent pricing, flexible options, and top-notch service you can trust.</p>
+                            <div class="hero-cta">
+                                <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-car-front-fill me-2"></i>Browse Fleet
+                                </a>
+                                <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
+                                    Contact Us <i class="bi bi-arrow-right ms-2"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -27,13 +33,19 @@
             <div class="carousel-item" style="background-image: url('{{ asset('images/slider/black-car.png') }}');">
                 <div class="carousel-overlay"></div>
                 <div class="container h-100">
-                    <div class="row align-items-center min-vh-75 py-5">
-                        <div class="col-lg-7 text-white pt-5 mt-5">
-                            <span class="badge bg-primary bg-opacity-75 px-3 py-2 mb-3 text-uppercase" style="letter-spacing:2px; font-size:.7rem;">Comfort · Style · Reliability</span>
-                            <h1 class="display-4 fw-bold mb-3 text-uppercase">Explore Agadir with Comfort and Style</h1>
-                            <p class="lead mb-4">Choose from a wide range of reliable rental cars and enjoy a smooth, stress-free journey from the heart of Agadir.</p>
-                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg me-2">Our Cars</a>
-                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                    <div class="row align-items-center hero-row">
+                        <div class="col-lg-8 col-xl-7 text-white hero-content">
+                            <span class="hero-eyebrow"><span class="dot"></span> Comfort · Style · Reliability</span>
+                            <h1 class="hero-title">Explore Agadir <span class="hero-title-accent">in Style</span></h1>
+                            <p class="hero-lead">Choose from a wide range of reliable rental cars and enjoy a smooth, stress-free journey from the heart of Agadir.</p>
+                            <div class="hero-cta">
+                                <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-car-front-fill me-2"></i>Our Cars
+                                </a>
+                                <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
+                                    Contact Us <i class="bi bi-arrow-right ms-2"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,13 +55,19 @@
             <div class="carousel-item" style="background-image: url('{{ asset('images/slider/morocco-car.jpg') }}'); background-position:bottom !important;">
                 <div class="carousel-overlay"></div>
                 <div class="container h-100">
-                    <div class="row align-items-center min-vh-75 py-5">
-                        <div class="col-lg-7 text-white pt-5 mt-5">
-                            <span class="badge bg-primary bg-opacity-75 px-3 py-2 mb-3 text-uppercase" style="letter-spacing:2px; font-size:.7rem;">Airport Service</span>
-                            <h1 class="display-4 fw-bold mb-3 text-uppercase">Airport Pickup & Drop-off Made Easy</h1>
-                            <p class="lead mb-4">Land and drive with ease — our convenient airport service gets you on the road without delays or complications.</p>
-                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg me-2">View Cars</a>
-                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                    <div class="row align-items-center hero-row">
+                        <div class="col-lg-8 col-xl-7 text-white hero-content">
+                            <span class="hero-eyebrow"><span class="dot"></span> Airport Service</span>
+                            <h1 class="hero-title">Land. Drive. <span class="hero-title-accent">Discover.</span></h1>
+                            <p class="hero-lead">Our convenient airport pickup & drop-off service gets you on the road without delays or complications.</p>
+                            <div class="hero-cta">
+                                <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-car-front-fill me-2"></i>View Cars
+                                </a>
+                                <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
+                                    Contact Us <i class="bi bi-arrow-right ms-2"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,5 +82,46 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+
+        <!-- Floating trust strip -->
+        <div class="hero-trust-strip d-none d-lg-flex">
+            <div class="hero-trust-item">
+                <i class="bi bi-star-fill"></i>
+                <div>
+                    <strong>4.9/5</strong>
+                    <span>Customer Rating</span>
+                </div>
+            </div>
+            <div class="hero-trust-divider"></div>
+            <div class="hero-trust-item">
+                <i class="bi bi-people-fill"></i>
+                <div>
+                    <strong>15k+</strong>
+                    <span>Happy Travelers</span>
+                </div>
+            </div>
+            <div class="hero-trust-divider"></div>
+            <div class="hero-trust-item">
+                <i class="bi bi-shield-check"></i>
+                <div>
+                    <strong>Fully Insured</strong>
+                    <span>Drive Worry-Free</span>
+                </div>
+            </div>
+            <div class="hero-trust-divider"></div>
+            <div class="hero-trust-item">
+                <i class="bi bi-headset"></i>
+                <div>
+                    <strong>24/7</strong>
+                    <span>Support</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <a href="#bookingForm" class="hero-scroll d-none d-md-flex" aria-label="Scroll down">
+            <span class="hero-scroll-line"></span>
+            <span class="hero-scroll-text">Scroll</span>
+        </a>
     </div>
 </section>

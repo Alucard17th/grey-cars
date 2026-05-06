@@ -36,30 +36,60 @@
         </div>
     </header> -->
 
+    <!-- Top Bar -->
+    <div class="top-bar d-none d-lg-block">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="top-bar-info">
+                <span><i class="bi bi-geo-alt-fill"></i> {{ config('company.contact.address') }}</span>
+                <span><i class="bi bi-clock-fill"></i> {{ config('company.contact.hours') }}</span>
+            </div>
+            <div class="top-bar-social">
+                <a href="{{ config('company.contact.facebook') }}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="{{ config('company.contact.instagram') }}" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="{{ config('company.contact.twitter') }}" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+                <a href="{{ config('company.contact.linkedin') }}" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-modern sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="{{ url('/') }}"><img class="img-fluid"
-                    src="{{ asset('images/logo.png') }}" style="width:200px;"
-                    alt="{{ config('app.name', 'Laravel') }}"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('home')) text-primary @endif" href="{{route('home')}}">Home</a>
+                        <a class="nav-link @if (request()->routeIs('home')) active @endif" href="{{route('home')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('about')) text-primary @endif" href="{{route('about')}}">About</a>
+                        <a class="nav-link @if (request()->routeIs('about')) active @endif" href="{{route('about')}}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('cars.index')) text-primary @endif" href="{{route('cars.index')}}">Our Cars</a>
+                        <a class="nav-link @if (request()->routeIs('cars.index')) active @endif" href="{{route('cars.index')}}">Our Cars</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('contact')) text-primary @endif" href="{{route('contact')}}">Contact</a>
+                        <a class="nav-link @if (request()->routeIs('contact')) active @endif" href="{{route('contact')}}">Contact</a>
                     </li>
                 </ul>
+                <div class="navbar-actions">
+                    <a href="tel:{{ config('company.contact.phone') }}" class="navbar-phone">
+                        <span class="navbar-phone-icon"><i class="bi bi-telephone-fill"></i></span>
+                        <span class="navbar-phone-text">
+                            <small>Call us anytime</small>
+                            <strong>{{ config('company.contact.phone') }}</strong>
+                        </span>
+                    </a>
+                    <a href="{{ route('cars.index') }}" class="btn btn-primary navbar-cta">
+                        <i class="bi bi-car-front-fill me-1"></i> Book Now
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
