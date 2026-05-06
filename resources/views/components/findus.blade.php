@@ -2,8 +2,9 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5 text-white">
-            <h2 class="fw-bold">WHERE TO FIND US?</h2>
-            <p class="lead text-white">Visit our locations across the country</p>
+            <span class="section-eyebrow">Our Locations</span>
+            <h2 class="fw-bold">Where to Find Us</h2>
+            <p class="text-light opacity-75 mx-auto" style="max-width:560px;">Visit our pickup points across Morocco — convenient airport service and city locations.</p>
         </div>
 
         <div class="row g-4">

@@ -10,15 +10,14 @@
             <!-- Slide 1 -->
             <div class="carousel-item active" style="background-image: url('{{ asset('images/slider/car-cards.png') }}');">
                 <div class="carousel-overlay"></div>
-                <div class="container">
-                    <div class="row align-items-center py-5">
-                        <div class="col-lg-6 order-lg-1 order-2 text-white pt-5 mt-5 ps-5">
-                            <h1 class="display-4 fw-bold mb-4 text-uppercase">Affordable Car Rentals</h1>
-                            <p class="lead mb-4">Get the best value for your trip with transparent pricing, flexible
-                                options, and top-notch service you can trust.
-                            </p>
-                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg px-4 me-2">Learn More</a>
-                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+                <div class="container h-100">
+                    <div class="row align-items-center min-vh-75 py-5">
+                        <div class="col-lg-7 text-white pt-5 mt-5">
+                            <span class="badge bg-primary bg-opacity-75 px-3 py-2 mb-3 text-uppercase" style="letter-spacing:2px; font-size:.7rem;">Premium Car Rentals · Agadir</span>
+                            <h1 class="display-4 fw-bold mb-3 text-uppercase">Affordable Car Rentals</h1>
+                            <p class="lead mb-4">Get the best value for your trip with transparent pricing, flexible options, and top-notch service you can trust.</p>
+                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg me-2">Browse Fleet</a>
+                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -27,15 +26,14 @@
             <!-- Slide 2 -->
             <div class="carousel-item" style="background-image: url('{{ asset('images/slider/black-car.png') }}');">
                 <div class="carousel-overlay"></div>
-                <div class="container">
-                    <div class="row align-items-center py-5">
-                        <div class="col-lg-6 order-lg-1 order-2 text-white pt-5 mt-5 ps-5">
-                            <h1 class="display-4 fw-bold mb-4 text-uppercase">Export Agadir with Comfort and Style</h1>
-                            <p class="lead mb-4">Choose for a wide range of reliable rental cars and enjoy a smooth,
-                                stress-free journey from the hearth of Agadir.
-                            </p>
-                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg px-4 me-2">Our Cars</a>
-                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+                <div class="container h-100">
+                    <div class="row align-items-center min-vh-75 py-5">
+                        <div class="col-lg-7 text-white pt-5 mt-5">
+                            <span class="badge bg-primary bg-opacity-75 px-3 py-2 mb-3 text-uppercase" style="letter-spacing:2px; font-size:.7rem;">Comfort · Style · Reliability</span>
+                            <h1 class="display-4 fw-bold mb-3 text-uppercase">Explore Agadir with Comfort and Style</h1>
+                            <p class="lead mb-4">Choose from a wide range of reliable rental cars and enjoy a smooth, stress-free journey from the heart of Agadir.</p>
+                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg me-2">Our Cars</a>
+                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -44,15 +42,14 @@
             <!-- Slide 3 -->
             <div class="carousel-item" style="background-image: url('{{ asset('images/slider/morocco-car.jpg') }}'); background-position:bottom !important;">
                 <div class="carousel-overlay"></div>
-                <div class="container">
-                    <div class="row align-items-center py-5">
-                        <div class="col-lg-6 order-lg-1 order-2 text-white pt-5 mt-5 ps-5">
-                            <h1 class="display-4 fw-bold mb-4 text-uppercase">Airport Pickup & Drop-off Made Easy</h1>
-                            <p class="lead mb-4">Land and drive with ease - our convenient airport service gets your on 
-                                the road without delays or complications.
-                            </p>
-                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg px-4 me-2">View Cars</a>
-                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+                <div class="container h-100">
+                    <div class="row align-items-center min-vh-75 py-5">
+                        <div class="col-lg-7 text-white pt-5 mt-5">
+                            <span class="badge bg-primary bg-opacity-75 px-3 py-2 mb-3 text-uppercase" style="letter-spacing:2px; font-size:.7rem;">Airport Service</span>
+                            <h1 class="display-4 fw-bold mb-3 text-uppercase">Airport Pickup & Drop-off Made Easy</h1>
+                            <p class="lead mb-4">Land and drive with ease — our convenient airport service gets you on the road without delays or complications.</p>
+                            <a href="{{ route('cars.index') }}" class="btn btn-primary btn-lg me-2">View Cars</a>
+                            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
                         </div>
                     </div>
                 </div>

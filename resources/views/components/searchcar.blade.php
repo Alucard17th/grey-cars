@@ -1,4 +1,7 @@
-<div class="container py-4">
+<div class="container search-card-wrap py-4">
+    <div class="text-center mb-3 d-none d-lg-block">
+        <span class="section-eyebrow" style="background:rgba(255,255,255,0.1); color:#fff;">Find Your Ride</span>
+    </div>
     <div class="card shadow">
         <div class="card-body p-4">
             <form action="{{ route('cars.search') }}" method="GET" id="bookingForm">
