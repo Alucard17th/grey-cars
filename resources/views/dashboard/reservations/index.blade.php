@@ -43,7 +43,7 @@
                         @endphp
                         <tr>
                             <td class="text-muted">#{{ $r->id }}</td>
-                            <td class="fw-semibold">{{ $r->car->name }}</td>
+                            <td class="fw-semibold">{{ $r->car?->name ?? '—' }}</td>
                             <td>
                                 <div class="fw-semibold">{{ $r->customer_name }}</div>
                                 <div class="small text-muted">{{ $r->customer_email }}</div>
