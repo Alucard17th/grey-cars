@@ -3,21 +3,36 @@
     'subtitle'    => null,
     'bgImage'     => null,   // URL or null
     'breadcrumbs' => [],     // [['label' => 'Home', 'url' => '/'], …]
+    'eyebrow'     => null,   // small label above title
 ])
 
 <header
-    {{ $attributes->class([
-        'page-header overflow-hidden py-5 py-lg-7',
-        'bg-dark'   // darker fallback if no bg img
-    ]) }}
+    {{ $attributes->class(['page-header-modern']) }}
+    @if($bgImage) style="background-image: url('{{ $bgImage }}');" @endif
 >
-    <div class="container ">
+    <div class="page-header-overlay"></div>
+    <div class="page-header-grid"></div>
+    <div class="page-header-glow"></div>
+
+    <div class="container position-relative">
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-8 text-center">
+            <div class="col-lg-10 col-xl-9 text-center page-header-content">
+
+                @if($eyebrow)
+                    <span class="page-header-eyebrow">
+                        <span class="dot"></span> {{ $eyebrow }}
+                    </span>
+                @endif
+
+                <h1 class="page-header-title">{{ $title }}</h1>
+
+                @isset($subtitle)
+                    <p class="page-header-subtitle">{{ $subtitle }}</p>
+                @endisset
 
                 {{-- Breadcrumbs (optional) --}}
                 @if($breadcrumbs)
-                    <nav aria-label="breadcrumb" class="mb-4">
+                    <nav aria-label="breadcrumb" class="page-header-breadcrumb mt-4">
                         <ol class="breadcrumb justify-content-center mb-0">
                             @foreach ($breadcrumbs as $item)
                                 <li
@@ -25,36 +40,19 @@
                                     @if($loop->last) aria-current="page" @endif
                                 >
                                     @if(!$loop->last)
-                                        <a href="{{ $item['url'] ?? '#' }}" class="link-light text-decoration-none">
+                                        <a href="{{ $item['url'] ?? '#' }}">
+                                            @if($loop->first)<i class="bi bi-house-fill me-1"></i>@endif
                                             {{ $item['label'] }}
                                         </a>
                                     @else
-                                        {{ $item['label'] }}
+                                        <i class="bi bi-geo-alt-fill me-1"></i>{{ $item['label'] }}
                                     @endif
                                 </li>
                             @endforeach
                         </ol>
                     </nav>
                 @endif
-
-                {{-- Title & subtitle --}}
-                <h1 class="display-4 fw-bold text-white mb-3">{{ $title }}</h1>
-
-                @isset($subtitle)
-                    <p class="lead text-white-50 mb-0">{{ $subtitle }}</p>
-                @endisset
             </div>
         </div>
     </div>
-
 </header>
-
-{{-- Inject one-off component-specific CSS --}}
-@once
-    @push('styles')
-        <style>
-            /* Keep SVG wave in sync with body background */
-            .page-header .fill-body { fill: var(--bs-body-bg); }
-        </style>
-    @endpush
-@endonce

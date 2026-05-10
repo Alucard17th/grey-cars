@@ -56,9 +56,9 @@
     <nav class="navbar navbar-expand-lg navbar-modern sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}">
+                <img src="{{ asset('images/nb-logo.png') }}" alt="{{ config('app.name', 'Laravel') }}">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar"></span>
                 <span class="navbar-toggler-bar"></span>
                 <span class="navbar-toggler-bar"></span>
