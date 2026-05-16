@@ -2152,8 +2152,9 @@ a.map-info-value:hover { color: #ffb233; }
 
 .page-header-breadcrumb .breadcrumb-item a:hover { color: #ffb233; }
 
+.page-header-breadcrumb .breadcrumb .breadcrumb-item.active,
 .page-header-breadcrumb .breadcrumb-item.active {
-    color: #fff;
+    color: #fff !important;
     font-weight: 600;
 }
 
