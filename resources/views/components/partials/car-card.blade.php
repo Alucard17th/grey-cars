@@ -3,7 +3,7 @@
 @endphp
 <div class="car-card">
     <div class="car-card-media">
-        <img src="{{ $car->image_url }}" alt="{{ $car->name }}">
+        <img src="{{ $car->image_url }}" alt="{{ $car->name }}" loading="lazy" decoding="async">
         <div class="car-card-price">
             {{ number_format($car->price_per_day, 0) }}{{ $currencySymbol }}<small>/day</small>
         </div>

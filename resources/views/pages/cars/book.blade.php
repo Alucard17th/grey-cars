@@ -184,7 +184,7 @@
                                         <input class="form-check-input" type="checkbox" name="accept_terms"
                                             id="accept_terms" required>
                                         <label class="form-check-label" for="accept_terms">
-                                            I acknowledge having read and accepted the <a href="{{ route('terms-and-conditions') }}" target="_blank">Terms and Conditions of Use</a>.
+                                            I have read and accept the <a href="{{ route('terms-and-conditions') }}" target="_blank">Terms and Conditions</a>.
                                         </label>
                                     </div>
                                 </div>

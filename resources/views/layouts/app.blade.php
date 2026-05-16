@@ -9,6 +9,12 @@
     <!-- Fav Icon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
 
+    <!-- Performance: preconnect to font CDN, preload hero image -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    @if(request()->routeIs('home'))
+    <link rel="preload" as="image" href="{{ asset('images/slider/car-cards.png') }}" fetchpriority="high">
+    @endif
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>

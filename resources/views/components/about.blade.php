@@ -5,7 +5,7 @@
             <!-- Image Column (Left) -->
             <div class="col-lg-6">
                 <div class="about-modern-img">
-                    <img src="{{ asset('images/about-us.jpg') }}" alt="Grey Cars Rental Fleet" class="img-fluid w-100">
+                    <img src="{{ asset('images/about-us.jpg') }}" alt="Grey Cars Rental Fleet" class="img-fluid w-100" loading="lazy" decoding="async">
                     <div class="about-modern-badge">
                         <h3 class="mb-0 text-white fw-bold">5+</h3>
                         <p class="mb-0 text-white small text-uppercase" style="letter-spacing:1px;">Years Experience</p>

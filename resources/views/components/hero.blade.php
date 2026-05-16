@@ -30,7 +30,7 @@
             </div>
 
             <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url('{{ asset('images/slider/black-car.png') }}');">
+            <div class="carousel-item" data-lazy-bg="{{ asset('images/slider/black-car.png') }}">
                 <div class="carousel-overlay"></div>
                 <div class="container h-100">
                     <div class="row align-items-center hero-row">
@@ -52,7 +52,7 @@
             </div>
 
             <!-- Slide 3 -->
-            <div class="carousel-item" style="background-image: url('{{ asset('images/slider/morocco-car.jpg') }}'); background-position:bottom !important;">
+            <div class="carousel-item" data-lazy-bg="{{ asset('images/slider/morocco-car.jpg') }}" style="background-position:bottom !important;">
                 <div class="carousel-overlay"></div>
                 <div class="container h-100">
                     <div class="row align-items-center hero-row">
@@ -117,6 +117,18 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            // Lazy-load non-active slide background images after first paint
+            window.addEventListener('load', () => {
+                requestIdleCallback ? requestIdleCallback(loadLazyBgs) : setTimeout(loadLazyBgs, 200);
+                function loadLazyBgs() {
+                    document.querySelectorAll('[data-lazy-bg]').forEach(el => {
+                        el.style.backgroundImage = `url('${el.dataset.lazyBg}')`;
+                    });
+                }
+            });
+        </script>
 
         <!-- Scroll indicator -->
         <a href="#bookingForm" class="hero-scroll d-none d-md-flex" aria-label="Scroll down">
