@@ -95,22 +95,8 @@
 
                     <div class="terms-section">
                         <h2 class="terms-heading"><span class="terms-num">12</span> Lost Keys or Documents</h2>
-                        <div class="terms-fees">
-                            <div class="terms-fee-card">
-                                <div class="terms-fee-icon"><i class="bi bi-key-fill"></i></div>
-                                <div>
-                                    <span class="terms-fee-label">Lost Car Key</span>
-                                    <strong class="terms-fee-value">150 €</strong>
-                                </div>
-                            </div>
-                            <div class="terms-fee-card">
-                                <div class="terms-fee-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
-                                <div>
-                                    <span class="terms-fee-label">Lost Vehicle Documents</span>
-                                    <strong class="terms-fee-value">500 €</strong>
-                                </div>
-                            </div>
-                        </div>
+                        <p>In the event of a lost car key, a fee of 150 € will be charged.</p>
+                        <p>In the event of lost vehicle documents, a fee of 500 € will be charged.</p>
                     </div>
                 </div>
             </div>
