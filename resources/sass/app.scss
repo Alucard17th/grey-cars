@@ -2447,6 +2447,11 @@ a.map-info-value:hover { color: #ffb233; }
     border-radius: 5px;
 }
 
+.badge.text-wrap {
+    white-space: normal;
+    max-width: 100%;
+}
+
 #bookingModal label {
     font-weight: 500;
     margin-bottom: 5px;

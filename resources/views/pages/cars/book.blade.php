@@ -34,7 +34,7 @@
                                 <h4 class="h5 fw-bold">Features:</h4>
                                 <div class="d-flex flex-wrap gap-2 mb-3">
                                     @foreach($car->options as $option)
-                                    <span class="badge bg-black p-2 d-flex align-items-center"><i
+                                    <span class="badge bg-black p-2 d-flex align-items-center text-wrap text-break"><i
                                             class="bi {{ car_icon($option) }} me-1 fs-5"></i>{{ $option }}</span>
                                     @endforeach
                                 </div>
@@ -43,7 +43,7 @@
                                 <h4 class="h5 fw-bold">Extras:</h4>
                                 <div class="d-flex flex-wrap gap-2 mb-3">
                                     @foreach($car->extras as $extra => $price)
-                                    <span class="badge bg-black p-2 d-flex align-items-center"><i
+                                    <span class="badge bg-black p-2 d-flex align-items-center text-wrap text-break"><i
                                             class="bi {{ car_icon($extra) }} me-1 fs-5"></i>
                                         {{ $extra }} ({{ $price }}{{ $currencySymbol }})</span>
                                     @endforeach
@@ -106,6 +106,18 @@
                                         <input type="tel" name="customer_phone" id="customer_phone" class="form-control"
                                             required>
                                     </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="customer_birth_date" class="form-label">Date of Birth</label>
+                                    <input type="date" name="customer_birth_date" id="customer_birth_date"
+                                        class="form-control" max="{{ now()->subDay()->format('Y-m-d') }}" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="customer_license_date" class="form-label">Driving License Date</label>
+                                    <input type="date" name="customer_license_date" id="customer_license_date"
+                                        class="form-control" max="{{ now()->subDay()->format('Y-m-d') }}" required>
                                 </div>
 
                                 <div class="mb-4">

@@ -55,16 +55,7 @@ class CarController extends Controller
         $validated['pickup_time'] = $validated['pickup_time'] ?? '00:00';
         $validated['dropoff_time'] = $validated['dropoff_time'] ?? '23:59';
 
-        $cars = Car::whereDoesntHave('reservations', function ($query) use ($validated) {
-                $query->where(function ($q) use ($validated) {
-                    $q->whereBetween('pickup_date', [$validated['pickup_date'], $validated['dropoff_date']])
-                    ->orWhereBetween('dropoff_date', [$validated['pickup_date'], $validated['dropoff_date']])
-                    ->orWhere(function ($inner) use ($validated) {
-                        $inner->where('pickup_date', '<=', $validated['pickup_date'])
-                                ->where('dropoff_date', '>=', $validated['dropoff_date']);
-                    });
-                });
-            })
+        $cars = Car::query()
             ->paginate(12)
             ->appends($validated);
 
@@ -86,12 +77,6 @@ class CarController extends Controller
                 'dropoff_time' => 'nullable',
             ]);
             
-            if(!empty($searchParams['pickup_date']) || !empty($searchParams['dropoff_date'])) {
-                if (!$car->isAvailable($searchParams['pickup_date'], $searchParams['dropoff_date'])) {
-                    return back()->with('error', 'This car is no longer available for your selected dates.');
-                }
-            }
-           
             return view('pages.cars.book', compact('car', 'searchParams'));
         }catch(\Exception $e) {
             // Log the error instead of dd() in production
@@ -112,16 +97,6 @@ class CarController extends Controller
                 'dropoff_time' => 'nullable',
             ]);
             
-            if(!empty($searchParams['pickup_date']) || !empty($searchParams['dropoff_date'])) {
-                if (!$car->isAvailable($searchParams['pickup_date'], $searchParams['dropoff_date'])) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'This car is no longer available for your selected dates.',
-                        'available' => false
-                    ]);
-                }
-            }
-           
             return response()->json([
                 'success' => true,
                 'message' => 'This car is available for your selected dates.',
@@ -144,6 +119,8 @@ class CarController extends Controller
                 'customer_name' => 'required|string|max:255',
                 'customer_email' => 'required|email',
                 'customer_phone' => 'required|string',
+                'customer_birth_date' => 'required|date|before:today',
+                'customer_license_date' => 'required|date|before:today',
                 'customer_flight_number' => 'required|string',
                 'pickup_location' => 'required|string',
                 'dropoff_location' => 'required|string',
@@ -213,6 +190,8 @@ class CarController extends Controller
                 'customer_name' => $validated['customer_name'],
                 'customer_email' => $validated['customer_email'],
                 'customer_phone' => $validated['customer_phone'],
+                'customer_birth_date' => $validated['customer_birth_date'],
+                'customer_license_date' => $validated['customer_license_date'],
                 'customer_flight_number' => $validated['customer_flight_number'],
                 'pickup_location' => $validated['pickup_location'],
                 'dropoff_location' => $validated['dropoff_location'],
@@ -270,6 +249,8 @@ class CarController extends Controller
                     Days: {$reservation->days}<br>
                     Customer: {$reservation->customer_name}<br>
                     Email: {$reservation->customer_email}<br>
+                    Date of birth: {$reservation->customer_birth_date->format('Y-m-d')}<br>
+                    Driving license date: {$reservation->customer_license_date->format('Y-m-d')}<br>
                     Flight number: {$reservation->customer_flight_number}<br>
                     Phone: <a href=\"{$whatsAppLink}\">WhatsApp {$reservation->customer_phone}</a><br><br>
                     Pickup: {$reservation->pickup_date->format('Y-m-d')} {$reservation->pickup_time} - {$reservation->pickup_location}<br>

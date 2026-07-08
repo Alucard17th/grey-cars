@@ -43,20 +43,6 @@ class Car extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    public function isAvailable($pickupDate, $dropoffDate, $pickupTime = null, $dropoffTime = null)
-    {
-        return !$this->reservations()
-            ->where(function($query) use ($pickupDate, $dropoffDate) {
-                $query->whereBetween('pickup_date', [$pickupDate, $dropoffDate])
-                    ->orWhereBetween('dropoff_date', [$pickupDate, $dropoffDate])
-                    ->orWhere(function($q) use ($pickupDate, $dropoffDate) {
-                        $q->where('pickup_date', '<=', $pickupDate)
-                            ->where('dropoff_date', '>=', $dropoffDate);
-                    });
-            })
-            ->exists();
-    }
-
     public function calculateTotalPrice($pickupDate, $dropoffDate)
     {
         $days = Carbon::parse($pickupDate)->diffInDays(Carbon::parse($dropoffDate));

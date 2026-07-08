@@ -133,6 +133,16 @@
                                         <li class="mb-2">
                                             <strong>Phone:</strong> {{ $reservation->customer_phone }}
                                         </li>
+                                        @if($reservation->customer_birth_date)
+                                        <li class="mb-2">
+                                            <strong>Date of Birth:</strong> {{ $reservation->customer_birth_date->format('F j, Y') }}
+                                        </li>
+                                        @endif
+                                        @if($reservation->customer_license_date)
+                                        <li class="mb-2">
+                                            <strong>Driving License Date:</strong> {{ $reservation->customer_license_date->format('F j, Y') }}
+                                        </li>
+                                        @endif
                                         <li class="mb-2">
                                             <strong>Flight Number:</strong> {{ $reservation->customer_flight_number }}
                                         </li>

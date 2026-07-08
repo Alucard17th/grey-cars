@@ -151,19 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (errorAlert) {
                 errorAlert.remove();
             }
-            // Check car availability first
-            const availabilityResponse = await fetch(
-                `/cars/${currentCarId}/json-book?${params.toString()}`
-            );
-            const availabilityData = await availabilityResponse.json();
-
-            if (!availabilityData.available) {
-                throw new Error(
-                    "This car is no longer available for your selected dates."
-                );
-            }
-
-            // If available, proceed to booking page
+            // Proceed to booking page
             window.location.href = `/cars/${currentCarId}/book?${params.toString()}`;
         } catch (error) {
             // Show error message

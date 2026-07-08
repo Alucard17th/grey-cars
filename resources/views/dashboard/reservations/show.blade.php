@@ -63,6 +63,12 @@
                 <div class="col-md-4"><strong>Name:</strong> {{ $reservation->customer_name }}</div>
                 <div class="col-md-4"><strong>Email:</strong> {{ $reservation->customer_email }}</div>
                 <div class="col-md-4"><strong>Phone:</strong> {{ $reservation->customer_phone }}</div>
+                @if($reservation->customer_birth_date)
+                    <div class="col-md-4"><strong>Date of birth:</strong> {{ $reservation->customer_birth_date->format('d M Y') }}</div>
+                @endif
+                @if($reservation->customer_license_date)
+                    <div class="col-md-4"><strong>Driving license date:</strong> {{ $reservation->customer_license_date->format('d M Y') }}</div>
+                @endif
                 @if($reservation->customer_flight_number)
                     <div class="col-12"><strong>Flight #:</strong> {{ $reservation->customer_flight_number }}</div>
                 @endif

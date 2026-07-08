@@ -12,6 +12,8 @@ class Reservation extends Model
     protected $casts = [
         'pickup_date' => 'date',
         'dropoff_date' => 'date',
+        'customer_birth_date' => 'date',
+        'customer_license_date' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'extras' => 'array',
